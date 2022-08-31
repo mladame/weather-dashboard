@@ -3,6 +3,9 @@
 //   search for city
 //      call geolocator api, then call weather api
 //      onclick search button, fetch api, json(), display results
+//      createEl
+//      geolocator api call: http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
+//      one call api call: https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 //   display city weather api
 //      city, date, day/night; icons; temp, wind, humidity, uv index(color coded); 5-day forecast
 //      uv index: green = favorable; yellow = moderate; red = severe
