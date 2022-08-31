@@ -1,0 +1,27 @@
+*{
+    font-family: 'Syne Mono', monospace;
+    color: var(--lime);
+}
+
+:root {
+--lime: limegreen;
+}
+
+body{
+    background-color: #272727;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(/assets/images/retro-computer-console-mini.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 20px;
+}
+
+.weather-title {
+    margin: 20px;
+}
