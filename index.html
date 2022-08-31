@@ -32,8 +32,54 @@
         </div>
 
         <!-- api call display -->
-        <div class="weather-display">
-
+        <div class="weather-container">
+            <h2 class="city-name"></h2>
+            <p id="current-day" class="current-date"></p>
+            <div class="current-weather-icon"></div>
+            <div class="current-temp"></div>
+            <div class="current-humidity"></div>
+            <div class="current-wind-speed"></div>
+            <div class="current-uvi"></div>
+            <div class="forecast-container">
+                <!-- bootstrap cards, id's for days? -->
+                <div class="card" style="width: 18rem;">
+                    <div id="day-1" class="card-body">
+                        <h5 class="forecast-date">Date</h5>
+                        <p class="card-icon">icon</p>
+                        <p class="card-temp">temp:</p>
+                        <p class="card-wind">wind:</p>
+                        <p class="card-humidity">humidity:</p>
+                    </div>
+                    <div id="day-2" class="card-body">
+                        <h5 class="forecast-date">Date</h5>
+                        <p class="card-icon">icon</p>
+                        <p class="card-temp">temp:</p>
+                        <p class="card-wind">wind:</p>
+                        <p class="card-humidity">humidity:</p>
+                    </div>
+                    <div id="day-3" class="card-body">
+                        <h5 class="forecast-date">Date</h5>
+                        <p class="card-icon">icon</p>
+                        <p class="card-temp">temp:</p>
+                        <p class="card-wind">wind:</p>
+                        <p class="card-humidity">humidity:</p>
+                    </div>
+                    <div day-4 class="card-body">
+                        <h5 class="forecast-date">Date</h5>
+                        <p class="card-icon">icon</p>
+                        <p class="card-temp">temp:</p>
+                        <p class="card-wind">wind:</p>
+                        <p class="card-humidity">humidity:</p>
+                    </div>
+                    <div day-5 class="card-body">
+                        <h5 class="forecast-date">Date</h5>
+                        <p class="card-icon">icon</p>
+                        <p class="card-temp">temp:</p>
+                        <p class="card-wind">wind:</p>
+                        <p class="card-humidity">humidity:</p>
+                    </div>
+                </div>
+            </div>            
         </div>
 
     </div>
@@ -47,7 +93,7 @@
     feature/setup, 
         set html head+body+footer(??)
     feature/style, 
-        link api's if necessary, bootstrap, icons (fontawesome), googlefonts, 
+        bootstrap, icons (fontawesome), googlefonts, 
         buttons; search history
     feature/city-search, 
     feature/results, 
@@ -57,6 +103,7 @@
         has name "weather dashboard"
         
     form-city-search
+        link api
         "search for city: "; placeholder?; search button; line divider
     list local storage
         lists cities previously searches
