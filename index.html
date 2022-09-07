@@ -17,16 +17,16 @@
 
     <!-- <div class="container"> -->
 
-        <section class="aside col-lg-2 col-md-4 col-sm-12">
+        <section class="aside col-lg-3 col-md-4 col-sm-12">
         <!-- user input -->
-        <div class="city-finder">
+        <div class="city-finder col">
             <h2>Search for a City:</h2>
             <textarea class="city-input" placeholder="Los Angeles"></textarea>
-            <button class="search-btn">Search</button>
+            <button id="search-btn">Search</button>
         </div>
         <hr>
         <!-- search history saved to local storage -->
-        <div class="search-history">
+        <div class="search-history col">
             <ul class="saved-cities">
                 <!-- createEl js class="city-btn" -->
             </ul>
@@ -34,7 +34,7 @@
         </section>
 
         <!-- api call display -->
-        <div id="main-display" class="card text-bg-dark col-lg-10 col-md-8 col-sm-12">
+        <div id="main-display" class="card text-bg-dark col-lg-9 col-md-8 col-sm-12">
             <img src="./assets/images/retro-computer-console.png" class="card-img" alt="Retro computer console image">
             <div class="card-img-overlay">
                 <h5 id="city-name" class="card-title">Card title</h5>
@@ -43,62 +43,52 @@
                 <div id="ctemp" class="card-text"></div>
                 <div id="chumidity" class="card-text"></div>
                 <div id="cwind" class="card-text"></div>
-                <div id="ctemp" class="card-text"></div>
-                <div id="ctemp" class="card-text"></div>
+                <div id="cuvi" class="card-text"></div>
             </div>
         </div>
-        <!-- <div class="weather-container col-10 row">
-            <h2 class="city-name"></h2>
-            <p id="current-day" class="current-date"></p>
-            <div class="current-weather-icon"></div>
-            <div class="current-temp"></div>
-            <div class="current-humidity"></div>
-            <div class="current-wind-speed"></div>
-            <div class="current-uvi"></div>
-            
-        </div> -->
-            <div class="forecast-container col-lg-10 col-md-6 col-sm-12">
-                <!-- bootstrap cards, id's for days? -->
-                <div class="row">
-                <div class="card" style="width: 18rem;">
-                    <div id="day-1" class="card-body">
-                        <h5 class="forecast-date">Date</h5>
-                        <p class="card-icon">icon</p>
-                        <p class="card-temp">temp:</p>
-                        <p class="card-wind">wind:</p>
-                        <p class="card-humidity">humidity:</p>
-                    </div>
-                    <div id="day-2" class="card-body">
-                        <h5 class="forecast-date">Date</h5>
-                        <p class="card-icon">icon</p>
-                        <p class="card-temp">temp:</p>
-                        <p class="card-wind">wind:</p>
-                        <p class="card-humidity">humidity:</p>
-                    </div>
-                    <div id="day-3" class="card-body">
-                        <h5 class="forecast-date">Date</h5>
-                        <p class="card-icon">icon</p>
-                        <p class="card-temp">temp:</p>
-                        <p class="card-wind">wind:</p>
-                        <p class="card-humidity">humidity:</p>
-                    </div>
-                    <div day-4 class="card-body">
-                        <h5 class="forecast-date">Date</h5>
-                        <p class="card-icon">icon</p>
-                        <p class="card-temp">temp:</p>
-                        <p class="card-wind">wind:</p>
-                        <p class="card-humidity">humidity:</p>
-                    </div>
-                    <div day-5 class="card-body">
-                        <h5 class="forecast-date">Date</h5>
-                        <p class="card-icon">icon</p>
-                        <p class="card-temp">temp:</p>
-                        <p class="card-wind">wind:</p>
-                        <p class="card-humidity">humidity:</p>
-                    </div>
-                    </div>
+        
+        <div class="forecast-container col-lg-10 col-md-6 col-sm-12">
+            <!-- bootstrap cards, id's for days? -->
+            <div class="row">
+            <div class="card" style="width: 18rem;">
+                <div id="day-1" class="card-body">
+                    <h5 class="forecast-date">Date</h5>
+                    <p class="card-icon">icon</p>
+                    <p class="card-temp">temp:</p>
+                    <p class="card-wind">wind:</p>
+                    <p class="card-humidity">humidity:</p>
                 </div>
-            </div>            
+                <div id="day-2" class="card-body">
+                    <h5 class="forecast-date">Date</h5>
+                    <p class="card-icon">icon</p>
+                    <p class="card-temp">temp:</p>
+                    <p class="card-wind">wind:</p>
+                    <p class="card-humidity">humidity:</p>
+                </div>
+                <div id="day-3" class="card-body">
+                    <h5 class="forecast-date">Date</h5>
+                    <p class="card-icon">icon</p>
+                    <p class="card-temp">temp:</p>
+                    <p class="card-wind">wind:</p>
+                    <p class="card-humidity">humidity:</p>
+                </div>
+                <div day-4 class="card-body">
+                    <h5 class="forecast-date">Date</h5>
+                    <p class="card-icon">icon</p>
+                    <p class="card-temp">temp:</p>
+                    <p class="card-wind">wind:</p>
+                    <p class="card-humidity">humidity:</p>
+                </div>
+                <div day-5 class="card-body">
+                    <h5 class="forecast-date">Date</h5>
+                    <p class="card-icon">icon</p>
+                    <p class="card-temp">temp:</p>
+                    <p class="card-wind">wind:</p>
+                    <p class="card-humidity">humidity:</p>
+                </div>
+                </div>
+            </div>
+        </div>            
         
 
     <!-- </div> -->

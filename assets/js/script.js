@@ -15,3 +15,4 @@
 //      previously searched cities remain on list despite refresh, display upon page open
 //      weather info clears upon refresh
 //      can click on cities and get info, will overwrite what is being shown
+

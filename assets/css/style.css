@@ -39,6 +39,7 @@ header{
     background-color: var(--gray);
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .city-finder h2 {
@@ -64,6 +65,9 @@ header{
 
 #main-display {
     /* max-width: 800px; */
+    background-color: var(--gray);
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .card-image {
