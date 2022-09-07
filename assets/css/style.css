@@ -5,10 +5,12 @@
 
 :root {
 --lime: limegreen;
+--darkgray: #272727;
+--gray: #424242;
 }
 
 body{
-    background-color: #272727;
+    background-color: var(--darkgray);
 }
 
 header{
@@ -24,4 +26,50 @@ header{
 
 .weather-title {
     margin: 20px;
+}
+
+.aside {
+    margin-right: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.city-finder {
+    width: auto;
+    background-color: var(--gray);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.city-finder h2 {
+    font-size: 25px;
+    padding: 5px;
+}
+
+.city-input {
+    margin: 10px;
+    resize: none;
+    background-color: #b4b4b4;
+    color: rgb(36, 163, 36);
+}
+
+.search-btn {
+    
+}
+
+.search-history {
+    
+    
+}
+
+#main-display {
+    /* max-width: 800px; */
+    background-color: var(--gray);
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.card-image {
+    
 }
