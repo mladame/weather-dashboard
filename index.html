@@ -15,24 +15,39 @@
         <h1 class="weather-title">Weather Dashboard</h1>
     </header>
 
-    <div class="container">
+    <!-- <div class="container"> -->
 
+        <section class="aside">
         <!-- user input -->
-        <div class="city-finder">
+        <div class="city-finder col-2">
             <h2>Search for a City:</h2>
             <textarea class="city-input" placeholder="Los Angeles"></textarea>
             <button class="search-btn">Search</button>
         </div>
-
+        <hr>
         <!-- search history saved to local storage -->
-        <div class="search-history">
+        <div class="search-history col-2">
             <ul class="saved-cities">
                 <!-- createEl js class="city-btn" -->
             </ul>
         </div>
+        </section>
 
         <!-- api call display -->
-        <div class="weather-container">
+        <div class="card text-bg-dark">
+            <img src="..." class="card-img" alt="...">
+            <div class="card-img-overlay">
+                <h5 id="city-name" class="card-title">Card title</h5>
+                <p id="cday" class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p id="cweather-icon" class="card-text">Last updated 3 mins ago</p>
+                <div id="ctemp" class="card-text"></div>
+                <div id="chumidity" class="card-text"></div>
+                <div id="cwind" class="card-text"></div>
+                <div id="ctemp" class="card-text"></div>
+                <div id="ctemp" class="card-text"></div>
+            </div>
+        </div>
+        <!-- <div class="weather-container col-10 row">
             <h2 class="city-name"></h2>
             <p id="current-day" class="current-date"></p>
             <div class="current-weather-icon"></div>
@@ -40,8 +55,11 @@
             <div class="current-humidity"></div>
             <div class="current-wind-speed"></div>
             <div class="current-uvi"></div>
+            
+        </div> -->
             <div class="forecast-container">
                 <!-- bootstrap cards, id's for days? -->
+                <div class="row">
                 <div class="card" style="width: 18rem;">
                     <div id="day-1" class="card-body">
                         <h5 class="forecast-date">Date</h5>
@@ -78,11 +96,12 @@
                         <p class="card-wind">wind:</p>
                         <p class="card-humidity">humidity:</p>
                     </div>
+                    </div>
                 </div>
             </div>            
-        </div>
+        
 
-    </div>
+    <!-- </div> -->
 <script src="./assets/js/script.js"></script>
 </body>
 </html>
