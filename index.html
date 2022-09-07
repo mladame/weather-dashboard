@@ -17,16 +17,16 @@
 
     <!-- <div class="container"> -->
 
-        <section class="aside">
+        <section class="aside col-lg-2 col-md-4 col-sm-12">
         <!-- user input -->
-        <div class="city-finder col-2">
+        <div class="city-finder">
             <h2>Search for a City:</h2>
             <textarea class="city-input" placeholder="Los Angeles"></textarea>
             <button class="search-btn">Search</button>
         </div>
         <hr>
         <!-- search history saved to local storage -->
-        <div class="search-history col-2">
+        <div class="search-history">
             <ul class="saved-cities">
                 <!-- createEl js class="city-btn" -->
             </ul>
@@ -34,8 +34,8 @@
         </section>
 
         <!-- api call display -->
-        <div class="card text-bg-dark">
-            <img src="..." class="card-img" alt="...">
+        <div id="main-display" class="card text-bg-dark col-lg-10 col-md-8 col-sm-12">
+            <img src="./assets/images/retro-computer-console.png" class="card-img" alt="Retro computer console image">
             <div class="card-img-overlay">
                 <h5 id="city-name" class="card-title">Card title</h5>
                 <p id="cday" class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -57,7 +57,7 @@
             <div class="current-uvi"></div>
             
         </div> -->
-            <div class="forecast-container">
+            <div class="forecast-container col-lg-10 col-md-6 col-sm-12">
                 <!-- bootstrap cards, id's for days? -->
                 <div class="row">
                 <div class="card" style="width: 18rem;">
