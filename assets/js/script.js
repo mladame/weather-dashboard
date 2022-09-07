@@ -16,3 +16,22 @@
 //      weather info clears upon refresh
 //      can click on cities and get info, will overwrite what is being shown
 
+// Start Code
+// DEFINE ELEMENTS
+const searchBtn = document.getElementById('#search-btn');
+
+// FETCH API
+searchBtn.addEventListener('click', fetchWeather);
+fetchWeather() {
+    var geocoderURL = "https://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=d2cb5b734a2fa9d859a2d482475acef1"
+
+
+    var weatherURL = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=97b3a3279f4bc24383eff898e8ad790c"
+
+
+}
+
+// RENDER WEATHER
+renderWeather() {
+
+}
