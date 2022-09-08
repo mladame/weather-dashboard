@@ -42,16 +42,21 @@ searchBtn.on("click", function(query){
     // fetch api for geocoder, user inputs desired City, geocoder returns corresponding lat + lon
     fetch(geocoderURL)
         .then(response => response.json())
-        .then(data => geocodeData.push(data[0]));
+        .then(data => console.log(data[0]));
 
-        console.log(geocodeData);
+        // check arr is receiving data
+        // console.log(geocodeData, [0].lat);
 
         // loop through geocodeData, define lat and lon, put into weather api call
-        
+        // for(let i=0; i < data.length; i++) {
+        //     if(data[0] === lat){
+        //         console.log('lat');
+        //     }
+        // }
 
         // define lat and lon
-        // let cityLat = $('geocodeData[0].lat');
-        // let cityLon = $('geocodeData[0].lon');
+        // let cityLat = $(geocodeData[0].lat);
+        // let cityLon = $(geocodeData[0].lon);
 
         // console.log(cityLat);
         // console.log(cityLon);
