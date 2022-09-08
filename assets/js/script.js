@@ -42,7 +42,12 @@ searchBtn.on("click", function(query){
     // fetch api for geocoder, user inputs desired City, geocoder returns corresponding lat + lon
     fetch(geocoderURL)
         .then((response) => response.json())
-        .then((data) => console.log(data[0].lat));
+        .then((data) => {
+            console.log(data[0]);
+            geocodeData.push(data[0].lat, data[0].lon);
+            // geocodeData.push();
+            console.log(geocodeData[0]);
+        });
 
         // check arr is receiving data
         // console.log(geocodeData, [0].lat);
@@ -62,7 +67,7 @@ searchBtn.on("click", function(query){
         // console.log(cityLon);
 
 
-    // let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' +  + '&lon=' +  + '&exclude=hourly,daily&appid=97b3a3279f4bc24383eff898e8ad790c'
+    let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + cityLat + '&lon=' + citylon + '&exclude=hourly,daily&appid=97b3a3279f4bc24383eff898e8ad790c'
 
     // fetch weather api, input lat + lon for desired City, return weather report
     // fetch(weatherURL)
