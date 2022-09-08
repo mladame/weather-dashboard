@@ -21,30 +21,31 @@
 // Start Code
 // DEFINE ELEMENTS
 const searchBtn = $("#search-btn");
-const cityInput = $(".city-input");
+const cityInput = $("#city-input");
 
 
 // FETCH API
-// searchBtn.addEventListener("click", fetchWeather);
-// function fetchWeather(query) {
-
-//     var geocoderURL = "https://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=d2cb5b734a2fa9d859a2d482475acef1"
-
-//         fetch(geocoderURL)
-//         .then(response => response.json())
-//         .then(data => console.log(data));
-
-//     var weatherURL = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=97b3a3279f4bc24383eff898e8ad790c"
-
-
-// }
-
 searchBtn.on("click", function(event){
     event.preventDefault();
-    console.log(event);
+    
+    var geocoderURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&limit=5&appid=d2cb5b734a2fa9d859a2d482475acef1"
+
+    console.log(geocoderURL);
+
+    // fetch api for geocoder, user inputs desired City, geocoder returns corresponding lat + lon
+    fetch(geocoderURL)
+        .then(response => response.json())
+        .then(data => console.log(data));
+        
+        
+
+    var weatherURL = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=97b3a3279f4bc24383eff898e8ad790c"
+
+    // fetch weather api, input lat + lon for desired City, return weather report
+    // fetch(weatherURL)
+        // .then(response => response.json())
+        // .then(data => console.log(data));
+
 })
 
 // RENDER WEATHER
-// function renderWeather() {
-
-// }
