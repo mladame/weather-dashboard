@@ -1,7 +1,9 @@
 // Pseudocode
 // need:
 //   search for city
-//      call geolocator api, then call weather api
+//      call geolocator api
+//          
+//       then call weather api
 //      onclick search button, fetch api, json(), display results
 //      createEl
 //      geolocator api call: http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
@@ -16,3 +18,44 @@
 //      weather info clears upon refresh
 //      can click on cities and get info, will overwrite what is being shown
 
+// Start Code
+// DEFINE ELEMENTS
+const searchBtn = $("#search-btn");
+
+
+
+// FETCH API
+searchBtn.on("click", function(query){
+    // event.preventDefault();
+
+    // Define user input for desired city
+    let cityInput = $("#city-input");
+    // iterate over cityInput's keys, logs key name and value to console
+    for(let key in cityInput) {
+        console.log(key + ":", cityInput[key].value);
+    }
+
+    console.log(cityInput);
+
+    // let cityName = $("city-name");
+    // let geocodeData = [];
+
+    let geocoderURL = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityInput[0].value + '&appid=d2cb5b734a2fa9d859a2d482475acef1'
+
+    // fetch api for geocoder, user inputs desired City, geocoder returns corresponding lat + lon
+    fetch(geocoderURL)
+        .then(response => response.json())
+        .then(data => console.log(Object.keys(data)));
+        
+        
+
+    let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=97b3a3279f4bc24383eff898e8ad790c"
+
+    // fetch weather api, input lat + lon for desired City, return weather report
+    // fetch(weatherURL)
+        // .then(response => response.json())
+        // .then(data => console.log(data));
+
+})
+
+// RENDER WEATHER
