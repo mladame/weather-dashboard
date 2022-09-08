@@ -30,7 +30,7 @@ searchBtn.on("click", function(query){
 
     // Define user input for desired city
     let cityInput = $("#city-input");
-    // iterate over cityInput's keys, logs key name and value to console
+    // iterate over cityInput's keys, logs key names and respective values to console
     for(let key in cityInput) {
         console.log(key + ":", cityInput[key].value);
     }
@@ -45,7 +45,7 @@ searchBtn.on("click", function(query){
     // fetch api for geocoder, user inputs desired City, geocoder returns corresponding lat + lon
     fetch(geocoderURL)
         .then(response => response.json())
-        .then(data => console.log(Object.keys(data)));
+        .then(data => console.log(data));
         
         
 
