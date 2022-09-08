@@ -23,7 +23,7 @@
 const searchBtn = $("#search-btn");
     // let cityName = $("city-name");
 
-let geoKeys = ["lat", "lon"], geoValues = [], ;
+let geoKeys = ["lat", "lon"], geoValues = [];
 let obj = {};
 
 
@@ -45,13 +45,13 @@ searchBtn.on("click", function(query){
         .then((response) => response.json())
         .then((data) => {
             console.log(data[0]);
-            
-            
-            console.log(geocodeKeys[0]);
+            geoValues.push(data[0].lat, data[0].lon);
+            console.log(geoValues);
+            // console.log(geocodeKeys[0]);
         });
 
         // check arr is receiving data
-        console.log(geocodeKeys);
+        // console.log(geocodeKeys);
 
     // fetch weather api using values pulled from geocoder api call
     let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + geocodeKeys[0] + '&lon=' + geocodeKeys[1] + '&exclude=hourly,daily&appid=97b3a3279f4bc24383eff898e8ad790c'
