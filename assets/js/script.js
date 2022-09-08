@@ -41,8 +41,8 @@ searchBtn.on("click", function(query){
 
     // fetch api for geocoder, user inputs desired City, geocoder returns corresponding lat + lon
     fetch(geocoderURL)
-        .then(response => response.json())
-        .then(data => console.log(data[0]));
+        .then((response) => response.json())
+        .then((data) => console.log(data[0].lat));
 
         // check arr is receiving data
         // console.log(geocodeData, [0].lat);
