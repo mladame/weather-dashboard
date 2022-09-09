@@ -19,14 +19,20 @@ const cTemp = $("#c-temp");
 const cWind = $("#c-wind");
 const cHumidity = $("#c-humidity");
 const cUVI = $("#c-uvi");
-const firstForecast = $("#forecast1");
-const secondForecast = $("#forecast2");
-const thirdForecast = $("#forecast3");
-const fourthForecast = $("#forecast4");
-const fifthForecast = $("#forecast5");
-const forecastCards = $(".forecast")
+// const firstForecast = $("#forecast1");
+// const secondForecast = $("#forecast2");
+// const thirdForecast = $("#forecast3");
+// const fourthForecast = $("#forecast4");
+// const fifthForecast = $("#forecast5");
+const forecastCards = $(".forecast");
+const pentIcon = $(".f-icon");
+const pentTemp = $(".f-temp");
+const pentWind = $(".f-wind");
+const pentHumid = $(".f-humid");
+const fDate = $(".f-date");
 
 const currentDate = moment().format("MM/DD/YYYY");
+const forecastDates = $(".f-date");
 
 
 // FETCH API
@@ -47,15 +53,13 @@ searchBtn.on("click", function(query){
         .then((response) => response.json())
         .then((data) => {
             console.log(data[0]);
-            // geoValues.push(data[0].lat, data[0].lon);
+            // Define lat and lon
             let geoLat = data[0].lat;
             let geoLon = data[0].lon;
+            // Define + display city + current date
             const cityName = data[0].name;
-            // console.log(geoLat);
-            // console.log(geoLon);
-            // console.log(cityName);
             cityDate.text("City: " + cityName + "  " + currentDate);
-
+            
             // fetch weather api using values pulled from geocoder api call
             let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + geoLat + '&lon=' + geoLon + '&exclude=minutely,hourly,alerts&units=imperial&appid=9b35244b1b7b8578e6c231fd7654c186'
 
@@ -71,35 +75,24 @@ searchBtn.on("click", function(query){
                 cHumidity.text("Humidity: " + data.current.humidity + " %");
                 cUVI.text("UV Index: " + data.current.uvi);
 
-                if(weatherIcon == "clear"){
-                    console.log('clear');
-                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-sun"></i> ${cIcon}</p>`;
+                if(weatherIcon === "clear"){
                     cIcon.addClass("fa-sun");
-                } else if(weatherIcon == "drizzle") {
+                } else if(weatherIcon === "drizzle") {
                     cIcon.addClass("fa-cloud-drizzle");
-                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud-drizzle"></i> ${cIcon}</p>`;
-                } else if(weatherIcon == "rain") {
+                } else if(weatherIcon === "rain") {
                     cIcon.addClass("fa-cloud-showers-heavy");
-                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud-showers-heavy"></i> ${cIcon}</p>`;
-                } else if(weatherIcon == "thunderstorm") {
+                } else if(weatherIcon === "thunderstorm") {
                     cIcon.addClass("fa-cloud-bolt");
-                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud-bolt"></i> ${cIcon}</p>`;
-                }
-                else if(weatherIcon == "Clouds") {
+                } else if(weatherIcon === "Clouds") {
                     cIcon.addClass("fa-cloud");
-                    console.log("see there are clouds!")
-                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud"></i> ${cIcon}</p>`;
-                }
-                else if(weatherIcon == "snow") {
+                    // console.log("see there are clouds!")
+                } else if(weatherIcon === "snow") {
                     cIcon.addClass("fa-cloud-snow");
-                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud-snow"></i> ${cIcon}</p>`;
-                }
-                else if(weatherIcon == "atmosphere") {
+                } else if(weatherIcon === "atmosphere") {
                     cIcon.addClass("fa-smoke");
-                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-smoke"></i> ${cIcon}</p>`;
-                }
+                };
                 
-                let fTemps =[], fWind = [], fHumidity = [], fIcon = [];
+                // let fTemps =[], fWind = [], fHumidity = [], fIcon = [];
                 
                 // console.log(fHumidity);
                 // console.log(fTemps);
@@ -108,17 +101,30 @@ searchBtn.on("click", function(query){
 
                 // Populate 5-Day Forecast
                 for(let i=0; i < 5; i++) {
-                    fTemps.push(forecast[i].temp.day);
-                    fWind.push(forecast[i].wind_speed);
-                    fHumidity.push(forecast[i].humidity);
-                    fIcon.push(forecast[i].weather[0].main);
+                    // fTemps.push(forecast[i].temp.day);
+                    // fWind.push(forecast[i].wind_speed);
+                    // fHumidity.push(forecast[i].humidity);
+                    // fIcon.push(forecast[i].weather[0].main);
 
+                    let fTemps = forecast[i].temp.day;
+                    let fWind = forecast[i].wind_speed;
+                    let fHumidity = forecast[i].humidity;
+                    let fIcon = forecast[i].weather[0].main;
+
+                    console.log(fHumidity);
+                    console.log(fTemps);
+                    console.log(fWind);
+                    console.log(fIcon);
                     
+                    pentTemp.text("Temp: " + fTemps);
 
-                    forecastCards.append(fTemp[i]).addClass("card-text")
-                    .append(fWind[i]).addClass("card-text")
-                    .append(fHumidity[i]).addClass("card-text");
                 }
+                // array.forEach(element => {
+                    
+                // });
+                firstForecast.append(fTemp[0]).addClass("card-text")
+                .append(fWind[0]).addClass("card-text")
+                .append(fHumidity[0]).addClass("card-text");
 
                 // console.log(forecast[i].temp.day);
                     // console.log(forecast[i].wind_speed);
