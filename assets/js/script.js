@@ -1,14 +1,6 @@
 // Pseudocode
 // need:
-//   search for city
-//      call geolocator api
-//          
-//       then call weather api
-//      onclick search button, fetch api, json(), display results
-//      createEl
-//      geolocator api call: http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-//      one call api call: https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
-//   display city weather api
+//  
 //      city name, date(moment.js format (mm/dd/yyyy)), day/night; icon representing weather;
 //       temp, wind, humidity, uv index(color coded); 
 //        5-day forecast
@@ -28,11 +20,7 @@ const cWind = $("#c-wind");
 const cHumidity = $("#c-humidity");
 const cUVI = $("#c-uvi");
 
-    // let cityName = $("city-name");
-
-// let geoKeys = ["lat", "lon"], geoValues = [];
-// let obj = {};
-// console.log(geoValues);
+const currentDate = moment().format("MM/DD/YYYY");
 
 
 // FETCH API
@@ -60,7 +48,7 @@ searchBtn.on("click", function(query){
             console.log(geoLat);
             console.log(geoLon);
             console.log(cityName);
-            cityDate.text("City: " + cityName + "  MM/DD/YYY");
+            cityDate.text("City: " + cityName + "  " + currentDate);
 
             // fetch weather api using values pulled from geocoder api call
             let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + geoLat + '&lon=' + geoLon + '&exclude=minutely,hourly,alerts&units=imperial&appid=9b35244b1b7b8578e6c231fd7654c186'
@@ -69,15 +57,45 @@ searchBtn.on("click", function(query){
             fetch(weatherURL)
                 .then(response => response.json())
             .then(data => {
-                console.log(data)
-                console.log(data.current.temp);
-                console.log(data.current.weather[0].main)
+
+                let weatherIcon = data.current.weather[0].main;
                 cTemp.text("Temp: " + data.current.temp + " °F");
                 cWind.text("Wind Speed: " + data.current.wind_speed + " mph");
                 cHumidity.text("Humidity: " + data.current.humidity + " %");
                 cUVI.text("UV Index: " + data.current.uvi);
-                
 
+                if(weatherIcon == "clear"){
+                    console.log('clear');
+                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-sun"></i> ${cIcon}</p>`;
+                    cIcon.addClass("fa-duotone fa-sun");
+                } else if(weatherIcon == "drizzle") {
+                    cIcon.addClass("fa-duotone fa-cloud-drizzle");
+                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud-drizzle"></i> ${cIcon}</p>`;
+                } else if(weatherIcon == "rain") {
+                    cIcon.addClass("fa-duotone fa-cloud-showers-heavy");
+                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud-showers-heavy"></i> ${cIcon}</p>`;
+                } else if(weatherIcon == "thunderstorm") {
+                    cIcon.addClass("fa-duotone fa-cloud-bolt");
+                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud-bolt"></i> ${cIcon}</p>`;
+                }
+                else if(weatherIcon == "Clouds") {
+                    cIcon.addClass("fa-duotone fa-cloud");
+                    console.log("see there are clouds!")
+                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud"></i> ${cIcon}</p>`;
+                }
+                else if(weatherIcon == "snow") {
+                    cIcon.addClass("fa-duotone fa-cloud-snow");
+                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud-snow"></i> ${cIcon}</p>`;
+                }
+                else if(weatherIcon == "atmosphere") {
+                    cIcon.addClass("fa-duotone fa-smoke");
+                    // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-smoke"></i> ${cIcon}</p>`;
+                }
+
+                // console.log(data)
+                // console.log(data.current.temp);
+                console.log(weatherIcon);
+                
             });
 
         })
