@@ -21,6 +21,13 @@
 // Start Code
 // DEFINE ELEMENTS
 const searchBtn = $("#search-btn");
+const cityDate = $("#city-date");
+const cIcon = $("#c-icon");
+const cTemp = $("#c-temp");
+const cWind = $("#c-wind");
+const cHumidity = $("#c-humidity");
+const cUVI = $("#c-uvi");
+
     // let cityName = $("city-name");
 
 // let geoKeys = ["lat", "lon"], geoValues = [];
@@ -49,34 +56,36 @@ searchBtn.on("click", function(query){
             // geoValues.push(data[0].lat, data[0].lon);
             let geoLat = data[0].lat;
             let geoLon = data[0].lon;
+            const cityName = data[0].name;
             console.log(geoLat);
             console.log(geoLon);
+            console.log(cityName);
+            cityDate.text("City: " + cityName + "  MM/DD/YYY");
 
-            let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + geoLat + '&lon=' + geoLon + '&exclude=hourly,daily&appid=9b35244b1b7b8578e6c231fd7654c186'
+            // fetch weather api using values pulled from geocoder api call
+            let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + geoLat + '&lon=' + geoLon + '&exclude=minutely,hourly,alerts&units=imperial&appid=9b35244b1b7b8578e6c231fd7654c186'
 
             // fetch weather api, input lat + lon for desired City, return weather report
             fetch(weatherURL)
                 .then(response => response.json())
-                .then(data => console.log(data));
+            .then(data => {
+                console.log(data)
+                console.log(data.current.temp);
+                console.log(data.current.weather[0].main)
+                cTemp.text("Temp: " + data.current.temp + " °F");
+                cWind.text("Wind Speed: " + data.current.wind_speed + " mph");
+                cHumidity.text("Humidity: " + data.current.humidity + " %");
+                cUVI.text("UV Index: " + data.current.uvi);
+                
+
+            });
 
         })
-        // .then((geoValues) =>{
-
-        // });
-
-        // for(const keys of geoValues){
-        //     console.log(keys);
-        // }
+        
 
 })
 
-// fetch weather api using values pulled from geocoder api call
-    // let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + geocodeKeys[0] + '&lon=' + geocodeKeys[1] + '&exclude=hourly,daily&appid=9b35244b1b7b8578e6c231fd7654c186'
 
-    // fetch weather api, input lat + lon for desired City, return weather report
-    // fetch(weatherURL)
-    //     .then(response => response.json())
-    //     .then(data => console.log(data));
 
 
 // RENDER WEATHER
