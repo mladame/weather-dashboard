@@ -5,8 +5,8 @@
 
 :root {
 --lime: limegreen;
---darkgray: #272727;
---gray: #424242;
+--darkgray: #1b1b1b;
+--gray: #303030;
 --black: #000;
 }
 
@@ -17,13 +17,11 @@ body{
 /* -----HEADER------ */
 header{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    background-image: url(/assets/images/retro-computer-console-mini.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    padding-left: 30px;
     margin-bottom: 20px;
+    background-color: #000;
 }
 
 .weather-title {
@@ -50,33 +48,47 @@ header{
     padding: 5px;
 }
 
-.city-input {
-    margin: 10px;
+#city-input {
     resize: none;
-    background-color: #b4b4b4;
     color: rgb(36, 163, 36);
+    background-color: var(--black);
+    border-top: 1px solid var(--lime) ;
+    border-bottom: 1px solid var(--lime);
+    border-right: 2px ridge var(--gray);
+    border-left: 2px ridge var(--gray);
 }
 
-.search-btn {
-    
+#search-btn {
+    width: fit-content;
 }
 
 /* -------LOCAL STORAGE------ */
 .search-history {
-    
-    
+    background-color: #000;
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 200px;
 }
 
 /* -------WEATHER DISPLAY-------- */
 .main-display {
-    border: 2px solid black;
+    border: 3px solid var(--gray);
+}
+
+#city-date {
+    font-size: 40px;
+}
+
+.cweather {
+    margin-left: 100px;
+    font-size: 20px;
 }
 
 .forecast-card {
-    border-top: 3px solid var(--lime) ;
-    border-bottom: 3px solid var(--lime);
-    border-right: 2px ridge var(--darkgray);
-    border-left: 2px ridge var(--darkgray);
+    border-top: 2px solid var(--lime) ;
+    border-bottom: 2px solid var(--lime);
+    border-right: 2px ridge var(--black);
+    border-left: 2px ridge var(--black);
 }
 
 .card-body {
