@@ -19,6 +19,12 @@ const cTemp = $("#c-temp");
 const cWind = $("#c-wind");
 const cHumidity = $("#c-humidity");
 const cUVI = $("#c-uvi");
+const firstForecast = $("#forecast1");
+const secondForecast = $("#forecast2");
+const thirdForecast = $("#forecast3");
+const fourthForecast = $("#forecast4");
+const fifthForecast = $("#forecast5");
+const forecastCards = $(".forecast")
 
 const currentDate = moment().format("MM/DD/YYYY");
 
@@ -59,6 +65,7 @@ searchBtn.on("click", function(query){
             .then(data => {
 
                 let weatherIcon = data.current.weather[0].main;
+                let forecast = data.daily;
                 cTemp.text("Temp: " + data.current.temp + " °F");
                 cWind.text("Wind Speed: " + data.current.wind_speed + " mph");
                 cHumidity.text("Humidity: " + data.current.humidity + " %");
@@ -92,9 +99,27 @@ searchBtn.on("click", function(query){
                     // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-smoke"></i> ${cIcon}</p>`;
                 }
 
+                const foreTemp = forecast[0].temp.day;
+                console.log(foreTemp);
                 // Populate 5-Day Forecast
+                for(let i=0; i < 5; i++) {
+                    console.log(forecast[i].temp.day);
+                    console.log(forecast[i].wind_speed);
+                    console.log(forecast[i].humidity);
+                    forecastCards.append(forecast[i].temp.day).addClass("class-text")
+                    .append(forecast[i].wind_speed).addClass("card-text")
+                    .append(forecast[i].humidity).addClass("card-text");
+                }
 
-                console.log(data)
+                // firstForecast.append(data[0].temp.day)
+                // $("h4").append()
+                // forecast.forEach(forecastCards => {
+                //     $("this").append(forecast[0].temp.day).addClass("class-text")
+                //     .append(forecast[0].wind_speed).addClass("card-text")
+                //     .append(forecast[0].humidity).addClass("card-text");
+                // });
+
+                console.log(forecast);
                 // console.log(data.current.temp);
                 // console.log(weatherIcon);
                 
@@ -109,3 +134,6 @@ searchBtn.on("click", function(query){
 
 
 // RENDER WEATHER
+
+
+// Local Storage
