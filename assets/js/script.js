@@ -74,42 +74,58 @@ searchBtn.on("click", function(query){
                 if(weatherIcon == "clear"){
                     console.log('clear');
                     // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-sun"></i> ${cIcon}</p>`;
-                    cIcon.addClass("fa-duotone fa-sun");
+                    cIcon.addClass("fa-sun");
                 } else if(weatherIcon == "drizzle") {
-                    cIcon.addClass("fa-duotone fa-cloud-drizzle");
+                    cIcon.addClass("fa-cloud-drizzle");
                     // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud-drizzle"></i> ${cIcon}</p>`;
                 } else if(weatherIcon == "rain") {
-                    cIcon.addClass("fa-duotone fa-cloud-showers-heavy");
+                    cIcon.addClass("fa-cloud-showers-heavy");
                     // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud-showers-heavy"></i> ${cIcon}</p>`;
                 } else if(weatherIcon == "thunderstorm") {
-                    cIcon.addClass("fa-duotone fa-cloud-bolt");
+                    cIcon.addClass("fa-cloud-bolt");
                     // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud-bolt"></i> ${cIcon}</p>`;
                 }
                 else if(weatherIcon == "Clouds") {
-                    cIcon.addClass("fa-duotone fa-cloud");
+                    cIcon.addClass("fa-cloud");
                     console.log("see there are clouds!")
                     // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud"></i> ${cIcon}</p>`;
                 }
                 else if(weatherIcon == "snow") {
-                    cIcon.addClass("fa-duotone fa-cloud-snow");
+                    cIcon.addClass("fa-cloud-snow");
                     // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-cloud-snow"></i> ${cIcon}</p>`;
                 }
                 else if(weatherIcon == "atmosphere") {
-                    cIcon.addClass("fa-duotone fa-smoke");
+                    cIcon.addClass("fa-smoke");
                     // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-smoke"></i> ${cIcon}</p>`;
                 }
+                
+                let fTemps =[], fWind = [], fHumidity = [], fIcon = [];
+                
+                // console.log(fHumidity);
+                // console.log(fTemps);
+                // console.log(fWind);
+                // console.log(fIcon);
 
-                const foreTemp = forecast[0].temp.day;
-                console.log(foreTemp);
                 // Populate 5-Day Forecast
                 for(let i=0; i < 5; i++) {
-                    console.log(forecast[i].temp.day);
-                    console.log(forecast[i].wind_speed);
-                    console.log(forecast[i].humidity);
-                    forecastCards.append(forecast[i].temp.day).addClass("class-text")
-                    .append(forecast[i].wind_speed).addClass("card-text")
-                    .append(forecast[i].humidity).addClass("card-text");
+                    fTemps.push(forecast[i].temp.day);
+                    fWind.push(forecast[i].wind_speed);
+                    fHumidity.push(forecast[i].humidity);
+                    fIcon.push(forecast[i].weather[0].main);
+
+                    
+
+                    forecastCards.append(fTemp[i]).addClass("card-text")
+                    .append(fWind[i]).addClass("card-text")
+                    .append(fHumidity[i]).addClass("card-text");
                 }
+
+                // console.log(forecast[i].temp.day);
+                    // console.log(forecast[i].wind_speed);
+                    // // console.log(forecast[i].humidity);
+                    // forecast1.append(forecast[0].temp.day).addClass("card-text")
+                    // .append(forecast[0].wind_speed).addClass("card-text")
+                    // .append(forecast[0].humidity).addClass("card-text");
 
                 // firstForecast.append(data[0].temp.day)
                 // $("h4").append()
