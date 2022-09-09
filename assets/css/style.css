@@ -13,6 +13,7 @@ body{
     background-color: var(--darkgray);
 }
 
+/* -----HEADER------ */
 header{
     display: flex;
     justify-content: center;
@@ -28,14 +29,15 @@ header{
     margin: 20px;
 }
 
+/* --------USER INPUT-------- */
 .aside {
     margin-right: 30px;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
 }
 
 .city-finder {
-    width: auto;
+    /* width: auto; */
     background-color: var(--gray);
     display: flex;
     flex-wrap: wrap;
@@ -58,18 +60,21 @@ header{
     
 }
 
+/* -------LOCAL STORAGE------ */
 .search-history {
     
     
 }
 
+/* -------WEATHER DISPLAY-------- */
 #main-display {
     /* max-width: 800px; */
     background-color: var(--gray);
-    padding-top: 5px;
-    padding-bottom: 5px;
+    /* padding-top: 5px;
+    padding-bottom: 5px; */
 }
 
 .card-image {
     
 }
+

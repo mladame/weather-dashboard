@@ -15,26 +15,124 @@
         <h1 class="weather-title">Daily Weather Report</h1>
     </header>
 
-    <!-- <div class="container"> -->
-    
-        <section class="aside col-lg-3 col-md-4 col-sm-12">
-        <!-- user input -->
+
+<div class="row">
+    <section class="column col-3">
+        
         <div class="city-finder col">
             <h2>Search for a City:</h2>
             <textarea id="city-input" class="user-input" placeholder="Los Angeles"></textarea>
             <button id="search-btn">Search</button>
         </div>
+            
+        <div class="search-history">   
+            <ul class="saved-cities list-group list-group-flush">
+                <!-- create element to populate -->
+            </ul>
+        </div> 
         
+    </section>
+        
+    <section class="column col-9">
+        
+        <div class="card text-bg-dark h-100px">
+            <img src="./assets/images/retro-computer-console.png" class="card-img" alt="Retro computer console image">
+            <div class="card-img-overlay">
+                <h5 id="city-date" class="card-title">Card title</h5>
+                <p id="c-icon" class="card-text">ICON</p>
+                <p id="c-temp" class="card-text">TEMP</p>
+                <p id="c-wind" class="card-text">WIND</p>
+                <p id="c-humidity" class="card-text">HUMIDITY</p>
+                <p id="c-uvi" class="card-text">UV INDEX</p>
+            </div>
+        </div>
+        
+        <div class="row row-cols-lg-5 row-cols-md-3 row-cols-sm-1 g-4 justify-content-around">
+            <div class="col">
+                <div class="card h-200">
+                <div class="forecast1 card-body">
+                    <h5 class="card-title pb-4">MM/DD/YYYY</h5>
+                    <p class="card-text">ICON</p>
+                    <p class="card-text">TEMP</p>
+                    <p class="card-text">WIND</p>
+                    <p class="card-text">HUMIDITY</p>
+                </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-200">
+                <div class="forecast2 card-body">
+                    <h5 class="card-title pb-4">MM/DD/YYYY</h5>
+                    <p class="card-text">ICON</p>
+                    <p class="card-text">TEMP</p>
+                    <p class="card-text">WIND</p>
+                    <p class="card-text">HUMIDITY</p>
+                </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-200">
+                    <div class="forecast3 card-body">
+                        <h5 class="card-title pb-4">MM/DD/YYYY</h5>
+                        <p class="card-text">ICON</p>
+                        <p class="card-text">TEMP</p>
+                        <p class="card-text">WIND</p>
+                        <p class="card-text">HUMIDITY</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-200">
+                    <div class="forecast4 card-body">
+                        <h5 class="card-title pb-4">MM/DD/YYYY</h5>
+                        <p class="card-text">ICON</p>
+                        <p class="card-text">TEMP</p>
+                        <p class="card-text">WIND</p>
+                        <p class="card-text">HUMIDITY</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-200">
+                    <div class="forecast5 card-body">
+                        <h5 class="card-title pb-4">MM/DD/YYYY</h5>
+                        <p class="card-text">ICON</p>
+                        <p class="card-text">TEMP</p>
+                        <p class="card-text">WIND</p>
+                        <p class="card-text">HUMIDITY</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+</div>
+
+<!-- <div class="p-3 m-0 border-0 bd-example">
+
+    <section class="aside col-lg-3 col-md-4 col-sm-12">
+
+        <!-- user input -->
+        <!-- <div class="city-finder col">
+            <h2>Search for a City:</h2>
+            <textarea id="city-input" class="user-input" placeholder="Los Angeles"></textarea>
+            <button id="search-btn">Search</button>
+        </div> -->
+
         <!-- search history saved to local storage -->
-        <div class="search-history col">
+        <!-- <div class="search-history col">
             <ul class="saved-cities">
                 <!-- createEl js class="city-btn" -->
-            </ul>
+            <!-- </ul>
         </div>
-        </section>
 
+    </section>
+        
+
+
+    <section class="weather-display">
         <!-- api call display -->
-        <div id="main-display" class="card text-bg-dark col-lg-9 col-md-8 col-sm-12">
+        <!-- <div id="main-display" class="card text-bg-dark col-lg-9 col-md-8 col-sm-12 justify-content-around">
             <img src="./assets/images/retro-computer-console.png" class="card-img" alt="Retro computer console image">
             <div class="card-img-overlay">
                 <h5 id="city-name" class="card-title">Card title</h5>
@@ -45,57 +143,19 @@
                 <div id="cwind" class="card-text"></div>
                 <div id="cuvi" class="card-text"></div>
             </div>
-        </div>
-        
-        <div class="Weather Report-container col-lg-10 col-md-6 col-sm-12">
-            <!-- bootstrap cards, id's for days? -->
-            <div class="row">
-            <div class="card" style="width: 18rem;">
-                <div id="day-1" class="card-body">
-                    <h5 class="Weather Report-date">Date</h5>
-                    <p class="card-icon">icon</p>
-                    <p class="card-temp">temp:</p>
-                    <p class="card-wind">wind:</p>
-                    <p class="card-humidity">humidity:</p>
-                </div>
-                <div id="day-2" class="card-body">
-                    <h5 class="Weather Report-date">Date</h5>
-                    <p class="card-icon">icon</p>
-                    <p class="card-temp">temp:</p>
-                    <p class="card-wind">wind:</p>
-                    <p class="card-humidity">humidity:</p>
-                </div>
-                <div id="day-3" class="card-body">
-                    <h5 class="Weather Report-date">Date</h5>
-                    <p class="card-icon">icon</p>
-                    <p class="card-temp">temp:</p>
-                    <p class="card-wind">wind:</p>
-                    <p class="card-humidity">humidity:</p>
-                </div>
-                <div day-4 class="card-body">
-                    <h5 class="Weather Report-date">Date</h5>
-                    <p class="card-icon">icon</p>
-                    <p class="card-temp">temp:</p>
-                    <p class="card-wind">wind:</p>
-                    <p class="card-humidity">humidity:</p>
-                </div>
-                <div day-5 class="card-body">
-                    <h5 class="Weather Report-date">Date</h5>
-                    <p class="card-icon">icon</p>
-                    <p class="card-temp">temp:</p>
-                    <p class="card-wind">wind:</p>
-                    <p class="card-humidity">humidity:</p>
-                </div>
-                </div>
-            </div>
-        </div>            
+        </div> --> --> -->
+
+
         
 
-    <!-- </div> -->
+        <!-- </section>
+
+</div> --> -->
+
     <script
-  src="https://code.jquery.com/jquery-3.6.1.min.js"
-  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-  crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+    crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
