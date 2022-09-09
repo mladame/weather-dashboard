@@ -45,9 +45,9 @@ searchBtn.on("click", function(query){
             let geoLat = data[0].lat;
             let geoLon = data[0].lon;
             const cityName = data[0].name;
-            console.log(geoLat);
-            console.log(geoLon);
-            console.log(cityName);
+            // console.log(geoLat);
+            // console.log(geoLon);
+            // console.log(cityName);
             cityDate.text("City: " + cityName + "  " + currentDate);
 
             // fetch weather api using values pulled from geocoder api call
@@ -92,9 +92,11 @@ searchBtn.on("click", function(query){
                     // cIcon.innerHTML += `<p id="c-icon" class="cweather card-text"><i class="fa-duotone fa-smoke"></i> ${cIcon}</p>`;
                 }
 
-                // console.log(data)
+                // Populate 5-Day Forecast
+
+                console.log(data)
                 // console.log(data.current.temp);
-                console.log(weatherIcon);
+                // console.log(weatherIcon);
                 
             });
 
