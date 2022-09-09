@@ -81,6 +81,24 @@ header{
 .cweather {
     margin-left: 100px;
     font-size: 20px;
+    border-radius: 10px;
+}
+
+#c-uvi {
+    width: fit-content;
+    padding: 10px;
+}
+
+.favorable {
+    border: 2px solid var(--lime);
+}
+
+.moderate {
+    border: 2px solid yellow;
+}
+
+.severe{
+    border: 2px solid red;
 }
 
 .forecast-container {

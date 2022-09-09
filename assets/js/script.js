@@ -42,6 +42,15 @@ searchBtn.on("click", function(query){
         // console.log(key + ":", cityInput[key].value);
     }
 
+    // Define value and key, set to local storage
+    var city = $(this).siblings("#city-input").val();
+    var name = $(this).parent().attr("id");
+    localStorage.setItem(name, city);
+
+    // create new element from local storage
+    const searches = document.createElement("p");
+    const memory = localstorage.getItem("city-name");
+
     // api url to get lat + lon for desired city
     let geocoderURL = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityInput[0].value + '&appid=d2cb5b734a2fa9d859a2d482475acef1'
 
@@ -72,6 +81,17 @@ searchBtn.on("click", function(query){
                 cHumidity.text("Humidity: " + data.current.humidity + "%");
                 cUVI.text("UV Index: " + data.current.uvi);
 
+                console.log(weatherIcon);
+                console.log(forecast);
+
+                if (data.current.uvi < "3") {
+                    cUVI.addClass("favorable");
+                } else if (data.current.uvi > "5") {
+                    cUVI.addClass("severe");
+                } else {
+                    cUVI.addClass("moderate");
+                };
+                
                 if(weatherIcon === "clear"){
                     cIcon.addClass("fa-sun");
                 } else if(weatherIcon === "drizzle") {
@@ -120,10 +140,6 @@ searchBtn.on("click", function(query){
                 
                 }
 
-                // console.log(forecast);
-                // console.log(data.current.temp);
-                // console.log(weatherIcon);
-                
             });
 
         })
