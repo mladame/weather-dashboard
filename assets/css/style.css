@@ -7,6 +7,7 @@
 --lime: limegreen;
 --darkgray: #272727;
 --gray: #424242;
+--black: #000;
 }
 
 body{
@@ -67,14 +68,17 @@ header{
 }
 
 /* -------WEATHER DISPLAY-------- */
-#main-display {
-    /* max-width: 800px; */
-    background-color: var(--gray);
-    /* padding-top: 5px;
-    padding-bottom: 5px; */
+.main-display {
+    border: 2px solid black;
 }
 
-.card-image {
-    
+.forecast-card {
+    border-top: 3px solid var(--lime) ;
+    border-bottom: 3px solid var(--lime);
+    border-right: 2px ridge var(--darkgray);
+    border-left: 2px ridge var(--darkgray);
 }
 
+.card-body {
+    background-color: var(--black);
+}

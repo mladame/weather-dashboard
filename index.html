@@ -16,18 +16,21 @@
     </header>
 
 
-<div class="row">
+<div class="row mx-5">
     <section class="column col-3">
         
-        <div class="city-finder col">
+        <div class="city-finder col mt-3 p-2">
             <h2>Search for a City:</h2>
-            <textarea id="city-input" class="user-input" placeholder="Los Angeles"></textarea>
+            <textarea id="city-input" class="user-input my-3" placeholder="Los Angeles"></textarea>
             <button id="search-btn">Search</button>
         </div>
             
-        <div class="search-history">   
+        <div class="search-history mx-5 my-3">   
             <ul class="saved-cities list-group list-group-flush">
                 <!-- create element to populate -->
+                <li class="my-2">los angeles</li>
+                <li>los angeles</li>
+                <li>los angeles</li>
             </ul>
         </div> 
         
@@ -35,8 +38,8 @@
         
     <section class="column col-9">
         
-        <div class="card text-bg-dark h-100px">
-            <img src="./assets/images/retro-computer-console.png" class="card-img" alt="Retro computer console image">
+        <div class="main-display card text-bg-dark mt-3 mb-5">
+            <img src="./assets/images/retro-computer-console.png" class="card-img" alt="Retro computer console image"  height="450px" max-width="920px">
             <div class="card-img-overlay">
                 <h5 id="city-date" class="card-title">Card title</h5>
                 <p id="c-icon" class="card-text">ICON</p>
@@ -49,7 +52,7 @@
         
         <div class="row row-cols-lg-5 row-cols-md-3 row-cols-sm-1 g-4 justify-content-around">
             <div class="col">
-                <div class="card h-200">
+                <div class="forecast-card card h-200">
                 <div class="forecast1 card-body">
                     <h5 class="card-title pb-4">MM/DD/YYYY</h5>
                     <p class="card-text">ICON</p>
@@ -60,7 +63,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-200">
+                <div class="forecast-card card h-200">
                 <div class="forecast2 card-body">
                     <h5 class="card-title pb-4">MM/DD/YYYY</h5>
                     <p class="card-text">ICON</p>
@@ -71,7 +74,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-200">
+                <div class="forecast-card card h-200">
                     <div class="forecast3 card-body">
                         <h5 class="card-title pb-4">MM/DD/YYYY</h5>
                         <p class="card-text">ICON</p>
@@ -82,7 +85,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-200">
+                <div class="forecast-card card h-200">
                     <div class="forecast4 card-body">
                         <h5 class="card-title pb-4">MM/DD/YYYY</h5>
                         <p class="card-text">ICON</p>
@@ -93,7 +96,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-200">
+                <div class="forecast-card card h-200">
                     <div class="forecast5 card-body">
                         <h5 class="card-title pb-4">MM/DD/YYYY</h5>
                         <p class="card-text">ICON</p>
