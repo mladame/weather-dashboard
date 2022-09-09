@@ -2,9 +2,6 @@
 // need:
 //  
 //      city name, date(moment.js format (mm/dd/yyyy)), day/night; icon representing weather;
-//       temp, wind, humidity, uv index(color coded); 
-//        5-day forecast
-//      uv index: green = favorable; yellow = moderate; red = severe
 //   list local storage - search history
 //      previously searched cities remain on list despite refresh, display upon page open
 //      weather info clears upon refresh
@@ -26,10 +23,9 @@ const pentWind = $(".f-wind");
 const pentHumid = $(".f-humid");
 
 const currentDate = moment().format("MM/DD/YYYY");
-// const moment = require('moment');
-const sum = moment().add(1, "d");
-console.log(sum);
 const fDate = $(".f-date");
+
+let cityList = [];
 
 
 // FETCH API
@@ -41,15 +37,6 @@ searchBtn.on("click", function(query){
     for(let key in cityInput) {
         // console.log(key + ":", cityInput[key].value);
     }
-
-    // Define value and key, set to local storage
-    var city = $(this).siblings("#city-input").val();
-    var name = $(this).parent().attr("id");
-    localStorage.setItem(name, city);
-
-    // create new element from local storage
-    const searches = document.createElement("p");
-    const memory = localstorage.getItem("city-name");
 
     // api url to get lat + lon for desired city
     let geocoderURL = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityInput[0].value + '&appid=d2cb5b734a2fa9d859a2d482475acef1'
@@ -145,7 +132,19 @@ searchBtn.on("click", function(query){
         })
         
 
+    // Define value and key, set to local storage
+    var city = $(this).siblings("#city-input").val();
+    var name = $(this).parent().attr("id");
+    localStorage.setItem(name, JSON.stringify(city));
+
+    cityList.push(JSON.parse(localStorage.getItem("city-name")));
+    console.log(cityList);
+
+    // create new element from local storage
+    const searches = document.createElement("p");
+    searches.textContent = localstorage.getItem("city-name");
+    document.body.appendChild(searches);
+
         cityInput.val("");
 })
 
-// Local Storage
