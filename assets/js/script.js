@@ -27,7 +27,6 @@ const fDate = $(".f-date");
 
 let cityList = [];
 
-
 // FETCH API
 searchBtn.on("click", function(query){
 
@@ -52,7 +51,17 @@ searchBtn.on("click", function(query){
             // Define + display city + current date
             const cityName = data[0].name;
             cityDate.text(cityName + "  " + currentDate);
+            var name = $("#city-name").attr("id");
+            localStorage.setItem(name, JSON.stringify(cityName));
             
+            $("#city-name cityName").val(localStorage.getItem("city-name"));
+            
+            for(let i=0; i<5; i++){
+            let startDate = moment();                
+            let incDays = startDate.add(i + 1, 'days').format("MM/DD/YYYY");
+            fDate.text(incDays);                
+            }
+
             // fetch weather api using values pulled from geocoder api call
             let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + geoLat + '&lon=' + geoLon + '&exclude=minutely,hourly,alerts&units=imperial&appid=9b35244b1b7b8578e6c231fd7654c186'
 
@@ -61,7 +70,7 @@ searchBtn.on("click", function(query){
                 .then(response => response.json())
             .then(data => {
 
-                let weatherIcon = data.current.weather[0].main;
+                let weatherIcon = JSON.stringify(data.current.weather[0].main);
                 let forecast = data.daily;
                 cTemp.text("Temp: " + data.current.temp + " °F");
                 cWind.text("Wind Speed: " + data.current.wind_speed + " mph");
@@ -71,40 +80,50 @@ searchBtn.on("click", function(query){
                 console.log(weatherIcon);
                 console.log(forecast);
 
+                
+                
+                if(weatherIcon === "Clear"){
+                    console.log("hi");
+                    cIcon.addClass("fa-sun");
+                } else if(weatherIcon === "Drizzle") {
+                    cIcon.addClass("fa-cloud-drizzle");
+                } else if(weatherIcon === "Rain") {
+                    cIcon.addClass("fa-cloud-showers-heavy");
+                } else if(weatherIcon === "Thunderstorm") {
+                    cIcon.addClass("fa-cloud-bolt");
+                } else if(weatherIcon === "Clouds") {
+                    cIcon.addClass("fa-cloud");
+                } else if(weatherIcon === "Snow") {
+                    cIcon.addClass("fa-cloud-snow");
+                } else if(weatherIcon === "Atmosphere") {
+                    cIcon.addClass("fa-smoke");
+                };
+
                 if (data.current.uvi < "3") {
                     cUVI.addClass("favorable");
                 } else if (data.current.uvi > "5") {
                     cUVI.addClass("severe");
                 } else {
                     cUVI.addClass("moderate");
-                };
-                
-                if(weatherIcon === "clear"){
-                    cIcon.addClass("fa-sun");
-                } else if(weatherIcon === "drizzle") {
-                    cIcon.addClass("fa-cloud-drizzle");
-                } else if(weatherIcon === "rain") {
-                    cIcon.addClass("fa-cloud-showers-heavy");
-                } else if(weatherIcon === "thunderstorm") {
-                    cIcon.addClass("fa-cloud-bolt");
-                } else if(weatherIcon === "Clouds") {
-                    cIcon.addClass("fa-cloud");
-                } else if(weatherIcon === "snow") {
-                    cIcon.addClass("fa-cloud-snow");
-                } else if(weatherIcon === "atmosphere") {
-                    cIcon.addClass("fa-smoke");
-                };
+                }
 
                 // Populate 5-Day Forecast
-                for(let i=0; i < 5; i++) {
+                for(var i=0; i < 5; i++) {
 
                     // Define Data for forecast
                     let fTemps = forecast[i].temp.day;
                     let fWind = forecast[i].wind_speed;
                     let fHumidity = forecast[i].humidity;
                     let fIcon = forecast[i].weather[0].main;
+                    // let startDate = moment();
+                    // let incDays = startDate.add(i + 1, 'days').format("MM/DD/YYYY");
+                    // var obj = {date: incDays}
+                    // let pentDates = [];
+                    // console.log(incDays);
+                    // pentDates.push(obj);
+                    // console.log(pentDates);
                     
-                    // fDate.text(currentDate.moment().add(1, "d"));
+                    // fDate.text(incDays);
                     pentTemp.text("Temp: " + fTemps);
                     pentWind.text("Wind: " + fWind + " mph");
                     pentHumid.text("Humidity: " + fHumidity + "%");
@@ -133,17 +152,17 @@ searchBtn.on("click", function(query){
         
 
     // Define value and key, set to local storage
-    var city = $(this).siblings("#city-input").val();
-    var name = $(this).parent().attr("id");
-    localStorage.setItem(name, JSON.stringify(city));
+    // var city = $(this).siblings("#city-input").val();
+    // var name = $(this).parent().attr("id");
+    // localStorage.setItem(name, JSON.stringify(city));
 
-    cityList.push(JSON.parse(localStorage.getItem("city-name")));
-    console.log(cityList);
+    // cityList.push(JSON.parse(localStorage.getItem("city-name")));
+    // console.log(cityList);
 
-    // create new element from local storage
-    const searches = document.createElement("p");
-    searches.textContent = localstorage.getItem("city-name");
-    document.body.appendChild(searches);
+    // // create new element from local storage
+    // const searches = document.createElement("p");
+    // searches.textContent = localstorage.getItem("city-name");
+    // document.body.appendChild(searches);
 
         cityInput.val("");
 })
