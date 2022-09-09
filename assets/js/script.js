@@ -19,20 +19,17 @@ const cTemp = $("#c-temp");
 const cWind = $("#c-wind");
 const cHumidity = $("#c-humidity");
 const cUVI = $("#c-uvi");
-// const firstForecast = $("#forecast1");
-// const secondForecast = $("#forecast2");
-// const thirdForecast = $("#forecast3");
-// const fourthForecast = $("#forecast4");
-// const fifthForecast = $("#forecast5");
 const forecastCards = $(".forecast");
 const pentIcon = $(".f-icon");
 const pentTemp = $(".f-temp");
 const pentWind = $(".f-wind");
 const pentHumid = $(".f-humid");
-const fDate = $(".f-date");
 
 const currentDate = moment().format("MM/DD/YYYY");
-const forecastDates = $(".f-date");
+// const moment = require('moment');
+const sum = moment().add(1, "d");
+console.log(sum);
+const fDate = $(".f-date");
 
 
 // FETCH API
@@ -58,7 +55,7 @@ searchBtn.on("click", function(query){
             let geoLon = data[0].lon;
             // Define + display city + current date
             const cityName = data[0].name;
-            cityDate.text("City: " + cityName + "  " + currentDate);
+            cityDate.text(cityName + "  " + currentDate);
             
             // fetch weather api using values pulled from geocoder api call
             let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + geoLat + '&lon=' + geoLon + '&exclude=minutely,hourly,alerts&units=imperial&appid=9b35244b1b7b8578e6c231fd7654c186'
@@ -72,7 +69,7 @@ searchBtn.on("click", function(query){
                 let forecast = data.daily;
                 cTemp.text("Temp: " + data.current.temp + " °F");
                 cWind.text("Wind Speed: " + data.current.wind_speed + " mph");
-                cHumidity.text("Humidity: " + data.current.humidity + " %");
+                cHumidity.text("Humidity: " + data.current.humidity + "%");
                 cUVI.text("UV Index: " + data.current.uvi);
 
                 if(weatherIcon === "clear"){
@@ -85,63 +82,45 @@ searchBtn.on("click", function(query){
                     cIcon.addClass("fa-cloud-bolt");
                 } else if(weatherIcon === "Clouds") {
                     cIcon.addClass("fa-cloud");
-                    // console.log("see there are clouds!")
                 } else if(weatherIcon === "snow") {
                     cIcon.addClass("fa-cloud-snow");
                 } else if(weatherIcon === "atmosphere") {
                     cIcon.addClass("fa-smoke");
                 };
-                
-                // let fTemps =[], fWind = [], fHumidity = [], fIcon = [];
-                
-                // console.log(fHumidity);
-                // console.log(fTemps);
-                // console.log(fWind);
-                // console.log(fIcon);
 
                 // Populate 5-Day Forecast
                 for(let i=0; i < 5; i++) {
-                    // fTemps.push(forecast[i].temp.day);
-                    // fWind.push(forecast[i].wind_speed);
-                    // fHumidity.push(forecast[i].humidity);
-                    // fIcon.push(forecast[i].weather[0].main);
 
+                    // Define Data for forecast
                     let fTemps = forecast[i].temp.day;
                     let fWind = forecast[i].wind_speed;
                     let fHumidity = forecast[i].humidity;
                     let fIcon = forecast[i].weather[0].main;
-
-                    console.log(fHumidity);
-                    console.log(fTemps);
-                    console.log(fWind);
-                    console.log(fIcon);
                     
+                    // fDate.text(currentDate.moment().add(1, "d"));
                     pentTemp.text("Temp: " + fTemps);
+                    pentWind.text("Wind: " + fWind + " mph");
+                    pentHumid.text("Humidity: " + fHumidity + "%");
 
+                    if(fIcon === "clear"){
+                        pentIcon.addClass("fa-sun");
+                    } else if(fIcon === "drizzle") {
+                        pentIcon.addClass("fa-cloud-drizzle");
+                    } else if(fIcon === "rain") {
+                        pentIcon.addClass("fa-cloud-showers-heavy");
+                    } else if(fIcon === "thunderstorm") {
+                        pentIcon.addClass("fa-cloud-bolt");
+                    } else if(fIcon === "Clouds") {
+                        pentIcon.addClass("fa-cloud");
+                    } else if(fIcon === "snow") {
+                        pentIcon.addClass("fa-cloud-snow");
+                    } else if(fIcon === "atmosphere") {
+                        pentIcon.addClass("fa-smoke");
+                    };
+                
                 }
-                // array.forEach(element => {
-                    
-                // });
-                firstForecast.append(fTemp[0]).addClass("card-text")
-                .append(fWind[0]).addClass("card-text")
-                .append(fHumidity[0]).addClass("card-text");
 
-                // console.log(forecast[i].temp.day);
-                    // console.log(forecast[i].wind_speed);
-                    // // console.log(forecast[i].humidity);
-                    // forecast1.append(forecast[0].temp.day).addClass("card-text")
-                    // .append(forecast[0].wind_speed).addClass("card-text")
-                    // .append(forecast[0].humidity).addClass("card-text");
-
-                // firstForecast.append(data[0].temp.day)
-                // $("h4").append()
-                // forecast.forEach(forecastCards => {
-                //     $("this").append(forecast[0].temp.day).addClass("class-text")
-                //     .append(forecast[0].wind_speed).addClass("card-text")
-                //     .append(forecast[0].humidity).addClass("card-text");
-                // });
-
-                console.log(forecast);
+                // console.log(forecast);
                 // console.log(data.current.temp);
                 // console.log(weatherIcon);
                 
@@ -150,12 +129,7 @@ searchBtn.on("click", function(query){
         })
         
 
+        cityInput.val("");
 })
-
-
-
-
-// RENDER WEATHER
-
 
 // Local Storage
