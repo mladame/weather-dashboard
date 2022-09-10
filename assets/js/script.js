@@ -32,6 +32,22 @@ searchBtn.on("click", function(query){
 
     // Define user input for desired city
     let cityInput = $("#city-input");
+    
+    // Local Storage
+    
+    // let searchHistory = $("#city-name");
+
+
+    // let searchHistory = JSON.parse(localStorage.getItem("cityList"));
+
+    // console.log(searchHistory);
+
+        cityList.push(cityInput.val().trim());
+        localStorage.setItem("cityList", JSON.stringify(cityList));
+        console.log(localStorage);
+
+
+
     // iterate over cityInput's keys, logs key names and respective values to console
     for(let key in cityInput) {
         // console.log(key + ":", cityInput[key].value);
@@ -51,10 +67,10 @@ searchBtn.on("click", function(query){
             // Define + display city + current date
             const cityName = data[0].name;
             cityDate.text(cityName + "  " + currentDate);
-            var name = $("#city-name").attr("id");
-            localStorage.setItem(name, JSON.stringify(cityName));
+            // var name = $("#city-name").attr("id");
+            // localStorage.setItem(name, JSON.stringify(cityName));
             
-            $("#city-name cityName").val(localStorage.getItem("city-name"));
+            // $("#city-name cityName").val(localStorage.getItem("city-name"));
             
             for(let i=0; i<5; i++){
             let startDate = moment();                
@@ -72,6 +88,7 @@ searchBtn.on("click", function(query){
 
                 let weatherIcon = JSON.stringify(data.current.weather[0].main);
                 let forecast = data.daily;
+                console.log(forecast);
                 cTemp.text("Temp: " + data.current.temp + " °F");
                 cWind.text("Wind Speed: " + data.current.wind_speed + " mph");
                 cHumidity.text("Humidity: " + data.current.humidity + "%");
@@ -79,15 +96,18 @@ searchBtn.on("click", function(query){
 
                 console.log(weatherIcon);
                 console.log(forecast);
-
+                var fIcon = 
+                forecast[i].weather[0].main;
+                console.log(fIcon);
                 
                 
-                if(weatherIcon === "Clear"){
+                if((weatherIcon || fIcon) === "Clear"){
                     console.log("hi");
                     cIcon.addClass("fa-sun");
                 } else if(weatherIcon === "Drizzle") {
                     cIcon.addClass("fa-cloud-drizzle");
-                } else if(weatherIcon === "Rain") {
+                } else if(weatherIcon === "Rain" || fIcon === "Rain") {
+                    console.log("rain, rain");
                     cIcon.addClass("fa-cloud-showers-heavy");
                 } else if(weatherIcon === "Thunderstorm") {
                     cIcon.addClass("fa-cloud-bolt");
@@ -99,7 +119,7 @@ searchBtn.on("click", function(query){
                     cIcon.addClass("fa-smoke");
                 };
 
-                if (data.current.uvi < "3") {
+                if (data.current.uvi < "3" || data.current.uvi === "0") {
                     cUVI.addClass("favorable");
                 } else if (data.current.uvi > "5") {
                     cUVI.addClass("severe");
@@ -114,7 +134,7 @@ searchBtn.on("click", function(query){
                     let fTemps = forecast[i].temp.day;
                     let fWind = forecast[i].wind_speed;
                     let fHumidity = forecast[i].humidity;
-                    let fIcon = forecast[i].weather[0].main;
+
                     // let startDate = moment();
                     // let incDays = startDate.add(i + 1, 'days').format("MM/DD/YYYY");
                     // var obj = {date: incDays}
@@ -128,21 +148,21 @@ searchBtn.on("click", function(query){
                     pentWind.text("Wind: " + fWind + " mph");
                     pentHumid.text("Humidity: " + fHumidity + "%");
 
-                    if(fIcon === "clear"){
-                        pentIcon.addClass("fa-sun");
-                    } else if(fIcon === "drizzle") {
-                        pentIcon.addClass("fa-cloud-drizzle");
-                    } else if(fIcon === "rain") {
-                        pentIcon.addClass("fa-cloud-showers-heavy");
-                    } else if(fIcon === "thunderstorm") {
-                        pentIcon.addClass("fa-cloud-bolt");
-                    } else if(fIcon === "Clouds") {
-                        pentIcon.addClass("fa-cloud");
-                    } else if(fIcon === "snow") {
-                        pentIcon.addClass("fa-cloud-snow");
-                    } else if(fIcon === "atmosphere") {
-                        pentIcon.addClass("fa-smoke");
-                    };
+                    // if(fIcon === "clear"){
+                    //     pentIcon.addClass("fa-sun");
+                    // } else if(fIcon === "drizzle") {
+                    //     pentIcon.addClass("fa-cloud-drizzle");
+                    // } else if(fIcon === "rain") {
+                    //     pentIcon.addClass("fa-cloud-showers-heavy");
+                    // } else if(fIcon === "thunderstorm") {
+                    //     pentIcon.addClass("fa-cloud-bolt");
+                    // } else if(fIcon === "Clouds") {
+                    //     pentIcon.addClass("fa-cloud");
+                    // } else if(fIcon === "snow") {
+                    //     pentIcon.addClass("fa-cloud-snow");
+                    // } else if(fIcon === "atmosphere") {
+                    //     pentIcon.addClass("fa-smoke");
+                    // };
                 
                 }
 
@@ -150,6 +170,8 @@ searchBtn.on("click", function(query){
 
         })
         
+
+
 
     // Define value and key, set to local storage
     // var city = $(this).siblings("#city-input").val();
@@ -167,3 +189,9 @@ searchBtn.on("click", function(query){
         cityInput.val("");
 })
 
+const clearBtn = $("#clear-btn");
+
+clearBtn.on("click", function(event){
+    localStorage.clear()
+    .then(console.log("Memory Wipe"))
+});
