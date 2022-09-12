@@ -98,6 +98,11 @@ header{
     border-radius: 10px;
 }
 
+#c-icon {
+    margin-left: 90px;
+    max-width: 70%;
+}
+
 #c-uvi {
     width: fit-content;
     padding: 10px;
