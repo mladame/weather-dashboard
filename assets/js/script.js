@@ -1,7 +1,5 @@
 // Pseudocode
 // need:
-//  
-//      city name, date(moment.js format (mm/dd/yyyy)), day/night; icon representing weather;
 //   list local storage - search history
 //      previously searched cities remain on list despite refresh, display upon page open
 //      weather info clears upon refresh
@@ -17,16 +15,11 @@ const cWind = $("#c-wind");
 const cHumidity = $("#c-humidity");
 const cUVI = $("#c-uvi");
 // const forecastCards = $(".forecast");
-// const pentIcon = $(".f-icon");
-// const pentTemp = $(".f-temp");
-// const pentWind = $(".f-wind");
-// const pentHumid = $(".f-humid");
 const displayHistory = $("#city-name");
 
 const currentDate = moment().format("MM/DD/YYYY");
-// const fDate = $(".f-date");
 
-let cityList = [];
+var cityList = [];
 
 // FETCH API
 searchBtn.on("click", function(query){
@@ -57,8 +50,6 @@ searchBtn.on("click", function(query){
             // Define + display city + current date
                 const cityName = data[0].name;
                 cityDate.text(cityName + "  " + currentDate);
-
-
 
             // fetch weather api using values pulled from geocoder api call
                 let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + geoLat + '&lon=' + geoLon + '&exclude=minutely,hourly,alerts&units=imperial&appid=9b35244b1b7b8578e6c231fd7654c186'
@@ -98,8 +89,93 @@ searchBtn.on("click", function(query){
                     $("#day5").text(forecastArr[4]);
                     }                
 
+                // set UV Index indicator
+                    if (data.current.uvi < "3" || data.current.uvi === "0") {
+                        cUVI.addClass("favorable");
+                    } else if (data.current.uvi > "5") {
+                        cUVI.addClass("severe");
+                    } else {
+                        cUVI.addClass("moderate");
+                    }
 
-                
+                // Populate 5-Day Forecast
+                    for(var i=0; i < 5; i++) {
+                        console.log(forecast[i].temp.day);
+
+                    // Define Data for forecast
+                        // var fTemp = document.createElement("p");
+                        // var fWind = document.createElement("p");
+                        // var fHumidity = document.createElement("p");
+                        // fTemp.text("Temp: " + forecast[i].temp.day);
+                        // fWind.text("Wind: " + forecast[i].wind_speed + "mph");
+                        // fHumidity.text("Humidity: " + forecast[i].humidity + "%");
+                        // forecast1.appendChild(fTemp);
+                        // forecast2.appendChild(fTemp);
+                        // forecast3.appendChild(fTemp);
+                        // forecast4.appendChild(fTemp);
+                        // forecast5.appendChild(fTemp);
+
+                        // let fTemps = forecast[i].temp.day;
+                        // let fWind = forecast[i].wind_speed;
+                        // let fHumidity = forecast[i].humidity;
+                        // let fIcon = forecast[i].weather[0].icon
+                        // var fIconURL = "http://openweathermap.org/img/wn/" + fIcon + ".png";
+
+                    // forecast icons
+                        // $("#icon0").html("<img src=" + fIconURL + ">");
+                        // $("#icon1").html("<img src=" + fIconURL + ">");
+                        // $("#icon2").html("<img src=" + fIconURL + ">");
+                        // $("#icon3").html("<img src=" + fIconURL + ">");
+                        // $("#icon4").html("<img src=" + fIconURL + ">");
+
+                        // console.log(fTemp);
+                        // console.log(fWind);
+                        // console.log(fHumidity);
+
+                        // pentTemp.text("Temp: " + fTemps);
+                        // pentWind.text("Wind: " + fWind + " mph");
+                        // pentHumid.text("Humidity: " + fHumidity + "%");
+
+                    }
+
+                });
+
+            })
+
+        // cityInput.val("");
+})
+
+// RENDER LOCAL STORAGE
+function renderLocalStorage() {
+
+    let searchHistory = JSON.parse(localStorage.getItem("cityList"));
+    console.log(searchHistory);
+    const links = $("#city-name");
+    
+
+    // links.value = 
+
+
+    
+    // searchHistory.forEach(displayHistory => {
+
+    // });
+    // for(let i=0; i < searchHistory.length; i++) {
+    //     const searches = document.createElement("li");
+    //     searches.textContent = searchHistory[0];
+    //     displayHistory.appendChild(searches).addClass("sh my-2");
+    // }
+
+}
+renderLocalStorage()
+
+// CLEAR LOCAL STORAGE
+const clearBtn = $("#clear-btn");
+clearBtn.on("click", function(event){
+    localStorage.clear()
+}); 
+
+// fix for custom icons - future
                 // if(weatherIcon === "Clear"){
                 //     console.log("hi");
                 //     // cIcon.child.addClass("fa-sun");
@@ -119,89 +195,3 @@ searchBtn.on("click", function(query){
                 // } else if(weatherIcon === "Atmosphere") {
                 //     cIcon.addClass("fa-smoke");
                 // };
-
-                    if (data.current.uvi < "3" || data.current.uvi === "0") {
-                        cUVI.addClass("favorable");
-                    } else if (data.current.uvi > "5") {
-                        cUVI.addClass("severe");
-                    } else {
-                        cUVI.addClass("moderate");
-                    }
-
-                // Populate 5-Day Forecast
-                    for(var i=0; i < 5; i++) {
-
-                // Define Data for forecast
-                    let fTemps = forecast[i].temp.day;
-                    let fWind = forecast[i].wind_speed;
-                    let fHumidity = forecast[i].humidity;
-
-                    console.log(fTemps);
-                    console.log(fWind);
-                    console.log(fHumidity);
-
-                    // let startDate = moment();
-                    // let incDays = startDate.add(i + 1, 'days').format("MM/DD/YYYY");
-                    // var obj = {date: incDays}
-                    // let pentDates = [];
-                    // console.log(incDays);
-                    // pentDates.push(obj);
-                    // console.log(pentDates);
-                    
-                    // fDate.text(incDays);
-                    // pentTemp.text("Temp: " + fTemps);
-                    // pentWind.text("Wind: " + fWind + " mph");
-                    // pentHumid.text("Humidity: " + fHumidity + "%");
-
-                    // if(fIcon === "clear"){
-                    //     pentIcon.addClass("fa-sun");
-                    // } else if(fIcon === "drizzle") {
-                    //     pentIcon.addClass("fa-cloud-drizzle");
-                    // } else if(fIcon === "rain") {
-                    //     pentIcon.addClass("fa-cloud-showers-heavy");
-                    // } else if(fIcon === "thunderstorm") {
-                    //     pentIcon.addClass("fa-cloud-bolt");
-                    // } else if(fIcon === "Clouds") {
-                    //     pentIcon.addClass("fa-cloud");
-                    // } else if(fIcon === "snow") {
-                    //     pentIcon.addClass("fa-cloud-snow");
-                    // } else if(fIcon === "atmosphere") {
-                    //     pentIcon.addClass("fa-smoke");
-                    // };
-                
-                    }
-
-                });
-
-            })
-
-        cityInput.val("");
-})
-
-// RENDER LOCAL STORAGE
-function renderLocalStorage() {
-
-    let searchHistory = JSON.parse(localStorage.getItem("cityList"));
-    console.log(searchHistory);
-
-    if(!cityList) {
-
-    }
-    
-    // searchHistory.forEach(displayHistory => {
-
-    // });
-    // for(let i=0; i < searchHistory.length; i++) {
-    //     const searches = document.createElement("li");
-    //     searches.textContent = searchHistory[0];
-    //     displayHistory.appendChild(searches).addClass("sh my-2");
-    // }
-
-}
-
-const clearBtn = $("#clear-btn");
-
-clearBtn.on("click", function(event){
-    localStorage.clear()
-    .then(console.log("Memory Wipe"))
-});
