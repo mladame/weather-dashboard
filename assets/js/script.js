@@ -16,6 +16,7 @@
     const cUVI = $("#c-uvi");
 // const forecastCards = $(".forecast");
     const displayHistory = $("#city-name");
+    const fIcon = $(".f-icon");
 
     
     // console.log(cityInput);
@@ -26,8 +27,8 @@
 // searchBtn.on("click", getWeather) 
 searchBtn.on("click", function(query) {
 
-// Define user input for desired city
-    let cityInput = $("#city-input").val().trim();
+    // Define user input for desired city
+        let cityInput = $("#city-input").val().trim();
 
     // api url to get lat + lon for desired city
         let geocoderURL = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityInput + '&appid=d2cb5b734a2fa9d859a2d482475acef1';
@@ -56,29 +57,28 @@ searchBtn.on("click", function(query) {
 
             // fetch weather api, input lat + lon for desired City, return weather report
                 fetch(weatherURL)
-                    .then(response => response.json())
+                .then(response => response.json())
                 .then(data => {
 
-                // console.log(data.current.weather[0].main);
-                console.log(data.current);
-                    let weatherIcon = data.current.weather[0].main;
-                    // var iconURL = "http://openweathermap.org/img/wn/" + weatherIcon + ".png";                
+                // Define data
+                    console.log(data);
+                    let wIcon = data.current.weather[0].main;               
                     let forecastData = []
                     let forecast = data.daily;
                     forecastData.push(forecast);
-                    console.log(weatherIcon);
+                    console.log(wIcon);
                 
                 // set current weather conditions
                     cTemp.text("Temp: " + data.current.temp + " °F");
                     cWind.text("Wind Speed: " + data.current.wind_speed + " mph");
                     cHumidity.text("Humidity: " + data.current.humidity + "%");
                     cUVI.text("UV Index: " + data.current.uvi);
-                    // $("#c-icon").html("<img src=" + iconURL + ">");
                 
-                // set forecast dates
+                // Sets Forecast dates
                     let startDate = moment();
                     let forecastArr = [];
                     
+                // Populates Dates of Forecast cards
                     for(let i=0; i<5; i++){
                     forecastDates = startDate.add( + 1, 'days').format("MM/DD/YYYY");
                     forecastArr.push(forecastDates);
@@ -89,7 +89,7 @@ searchBtn.on("click", function(query) {
                     $("#day5").text(forecastArr[4]);
                     }                
 
-                // set UV Index indicator
+                // Set UV Index indicator
                     if (data.current.uvi < "3" || data.current.uvi === "0") {
                         cUVI.addClass("favorable");
                     } else if (data.current.uvi > "5") {
@@ -98,26 +98,46 @@ searchBtn.on("click", function(query) {
                         cUVI.addClass("moderate");
                     }
 
-                    if(weatherIcon === "Clear"){
-                        cIcon.child.addClass("fa-sun");
-                    } else if(weatherIcon === "Drizzle") {
+                // Adds class to icon html to render corresponding forecast - main display
+                    if(wIcon === "Clear"){
+                        cIcon.addClass("fa-sun");
+                    } else if(wIcon === "Drizzle") {
                         cIcon.addClass("fa-cloud-drizzle");
-                    } else if(weatherIcon === "Rain") {
+                    } else if(wIcon === "Rain") {
                         cIcon.addClass("fa-cloud-showers-heavy");
-                    } else if(weatherIcon === "Thunderstorm") {
+                    } else if(wIcon === "Thunderstorm") {
                         cIcon.addClass("fa-cloud-bolt");
-                    } else if(weatherIcon === "Clouds") {
+                    } else if(wIcon === "Clouds") {
                         console.log("cloudy skies")
                         cIcon.addClass("fa-cloud");
-                    } else if(weatherIcon === "Snow") {
+                    } else if(wIcon === "Snow") {
                         cIcon.addClass("fa-cloud-snow");
-                    } else if(weatherIcon === "Atmosphere") {
+                    } else if(wIcon === "Atmosphere") {
                         cIcon.addClass("fa-smoke");
                     };
-
+                let fwIcon = data.daily[i].weather[0].main;
                 // Populate 5-Day Forecast
                     for(var i=0; i < 5; i++) {
                         console.log(forecast[i].temp.day);
+                        
+
+                        if(fwIcon === "Clear"){
+                            fIcon.addClass("fa-sun");
+                        } else if(fwIcon === "Drizzle") {
+                            fIcon.addClass("fa-cloud-drizzle");
+                        } else if(fwIcon === "Rain") {
+                            fIcon.addClass("fa-cloud-showers-heavy");
+                        } else if(fwIcon === "Thunderstorm") {
+                            fIcon.addClass("fa-cloud-bolt");
+                        } else if(fwIcon === "Clouds") {
+                            console.log("cloudy skies")
+                            fIcon.addClass("fa-cloud");
+                        } else if(fwIcon === "Snow") {
+                            fIcon.addClass("fa-cloud-snow");
+                        } else if(fwIcon === "Atmosphere") {
+                            fIcon.addClass("fa-smoke");
+                        };
+
                         // answerPool.children[i].textContent = shuffledQuestions[currentQuestionIndex].choices[i];
                     // Define Data for forecast
                         // var fTemp = document.createElement("p");
@@ -159,8 +179,13 @@ searchBtn.on("click", function(query) {
 
             })
 
-        // cityInput.val("");
+        let = cityInput.val("");
 });
+
+// alternate icon display KEEP --------------------------------
+// var iconURL = "http://openweathermap.org/img/wn/" + wIcon + ".png"; 
+// $("#c-icon").html("<img src=" + iconURL + ">");
+// ------------------------------------------------------------
 
 // RENDER LOCAL STORAGE
 // function renderLocalStorage() {
@@ -200,18 +225,18 @@ searchBtn.on("click", function(query) {
 // }); 
 
 // fix for custom icons - future
-                // if(weatherIcon === "Clear"){
+                // if(wIcon === "Clear"){
                 //     cIcon.child.addClass("fa-sun");
-                // } else if(weatherIcon === "Drizzle") {
+                // } else if(wIcon === "Drizzle") {
                 //     cIcon.addClass("fa-cloud-drizzle");
-                // } else if(weatherIcon === "Rain") {
+                // } else if(wIcon === "Rain") {
                 //     cIcon.addClass("fa-cloud-showers-heavy");
-                // } else if(weatherIcon === "Thunderstorm") {
+                // } else if(wIcon === "Thunderstorm") {
                 //     cIcon.addClass("fa-cloud-bolt");
-                // } else if(weatherIcon === "Clouds") {
+                // } else if(wIcon === "Clouds") {
                 //     cIcon.addClass("fa-cloud");
-                // } else if(weatherIcon === "Snow") {
+                // } else if(wIcon === "Snow") {
                 //     cIcon.addClass("fa-cloud-snow");
-                // } else if(weatherIcon === "Atmosphere") {
+                // } else if(wIcon === "Atmosphere") {
                 //     cIcon.addClass("fa-smoke");
                 // };
