@@ -117,75 +117,59 @@ searchBtn.on("click", function(query) {
                     };
 
                     let forecastDaily = [];
-                    forecastDaily.push(data.daily[0], data.daily[1], data.daily[2], data.daily[3], data.daily[4]);
-                    console.log(forecastDaily);
+                    let fWeather = [];
 
+                    for(var i=0; i<5; i++) {
+                        forecastDaily.push(data.daily[i])
+                        fWeather.push(forecastDaily[i].weather[0].main);
+                    }
+                    console.log(forecastDaily);
+                    console.log(fWeather);
 
                 // Populate 5-Day Forecast
                     for(var i=0; i < 5; i++) {
-                        console.log(forecast[i].temp.day);
 
+                    // Set daily data to forecast cards
                         fTemp[i].textContent = "Temp: " + forecastDaily[i].temp.day + "°F";
                         fWind[i].textContent = "Wind: " + forecastDaily[i].wind_speed + "mph";
                         fHumidity[i].textContent = "Humidity: " + forecastDaily[i].humidity + "%";
+
+                    // Set icons to forecast cards
+                        // let fwIconArr = [];
+                        // for(var i=0; i< forecastDaily.length; i++) {
+                            
+                        // }
+                        
                         // let dailyW = data.daily[i].weather[0].main
-                        // let fwIcon = [];
+                        
                         // fwIcon.push();
                         // console.log(dailyW);
-                        // fwIcon.forEach(fIcon => {
-                        //     if(fwIcon === "Clear"){
-                        //     fIcon.addClass("fa-sun");
-                        //     } else if(fwIcon === "Drizzle") {
-                        //         fIcon.addClass("fa-cloud-drizzle");
-                        //     } else if(fwIcon === "Rain") {
-                        //         fIcon.addClass("fa-cloud-showers-heavy");
-                        //     } else if(fwIcon === "Thunderstorm") {
-                        //         fIcon.addClass("fa-cloud-bolt");
-                        //     } else if(fwIcon === "Clouds") {
-                        //         console.log("cloudy skies")
-                        //         fIcon.addClass("fa-cloud");
-                        //     } else if(fwIcon === "Snow") {
-                        //         fIcon.addClass("fa-cloud-snow");
-                        //     } else if(fwIcon === "Atmosphere") {
-                        //         fIcon.addClass("fa-smoke");
-                        //     };
+                        // forecastDaily.forEach(fIcon => {
+
+                            // let fwIcon = forecastDaily[i].weather[0].main;
+                            // console.log(fwIcon);
+
+                            // if(fwIcon === "Clear"){
+                            //     fwIconArr.push("fa-sun");
+                            //     // let fClass = "fa-sun"
+                            //     // fIcon[i].classList.add("fa-sun");
+                            // } else if(fwIcon === "Drizzle") {
+                            //     fwIconArr.push("fa-cloud-drizzle");
+                            // } else if(fwIcon === "Rain") {
+                            //     fwIconArr.push("fa-cloud-showers-heavy");
+                            // } else if(fwIcon === "Thunderstorm") {
+                            //     fwIconArr.push("fa-cloud-bolt");
+                            // } else if(fwIcon === "Clouds") {
+                            //     console.log("cloudy skies")
+                            //     fwIconArr.push("fa-cloud");
+                            // } else if(fwIcon === "Snow") {
+                            //     fwIconArr.push("fa-cloud-snow");
+                            // } else if(fwIcon === "Atmosphere") {
+                            //     fwIconArr.push("fa-smoke");
+                            // };
+
+                            // fIcon[i].addClass(fwIconArr[i]);
                         // })
-                        
-                        
-                        
-                    // Define Data for forecast
-                        // var fTemp = document.createElement("p");
-                        // var fWind = document.createElement("p");
-                        // var fHumidity = document.createElement("p");
-                        // fTemp.text("Temp: " + forecast[i].temp.day);
-                        // fWind.text("Wind: " + forecast[i].wind_speed + "mph");
-                        // fHumidity.text("Humidity: " + forecast[i].humidity + "%");
-                        // forecast1.appendChild(fTemp);
-                        // forecast2.appendChild(fTemp);
-                        // forecast3.appendChild(fTemp);
-                        // forecast4.appendChild(fTemp);
-                        // forecast5.appendChild(fTemp);
-
-                        // let fTemps = forecast[i].temp.day;
-                        // let fWind = forecast[i].wind_speed;
-                        // let fHumidity = forecast[i].humidity;
-                        // let fIcon = forecast[i].weather[0].icon
-                        // var fIconURL = "http://openweathermap.org/img/wn/" + fIcon + ".png";
-
-                    // forecast icons
-                        // $("#icon0").html("<img src=" + fIconURL + ">");
-                        // $("#icon1").html("<img src=" + fIconURL + ">");
-                        // $("#icon2").html("<img src=" + fIconURL + ">");
-                        // $("#icon3").html("<img src=" + fIconURL + ">");
-                        // $("#icon4").html("<img src=" + fIconURL + ">");
-
-                        // console.log(fTemp);
-                        // console.log(fWind);
-                        // console.log(fHumidity);
-
-                        // pentTemp.text("Temp: " + fTemps);
-                        // pentWind.text("Wind: " + fWind + " mph");
-                        // pentHumid.text("Humidity: " + fHumidity + "%");
 
                     }
 
@@ -237,20 +221,3 @@ searchBtn.on("click", function(query) {
 // clearBtn.on("click", function(event){
 //     localStorage.clear()
 // }); 
-
-// fix for custom icons - future
-                // if(wIcon === "Clear"){
-                //     cIcon.child.addClass("fa-sun");
-                // } else if(wIcon === "Drizzle") {
-                //     cIcon.addClass("fa-cloud-drizzle");
-                // } else if(wIcon === "Rain") {
-                //     cIcon.addClass("fa-cloud-showers-heavy");
-                // } else if(wIcon === "Thunderstorm") {
-                //     cIcon.addClass("fa-cloud-bolt");
-                // } else if(wIcon === "Clouds") {
-                //     cIcon.addClass("fa-cloud");
-                // } else if(wIcon === "Snow") {
-                //     cIcon.addClass("fa-cloud-snow");
-                // } else if(wIcon === "Atmosphere") {
-                //     cIcon.addClass("fa-smoke");
-                // };
