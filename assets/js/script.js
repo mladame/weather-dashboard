@@ -19,7 +19,9 @@
     const fIcon = $(".f-icon");
     const fData = $(".f-data");
     const fDate = $(".f-date");
-
+    const fTemp = $(".f-temp");
+    const fWind = $(".f-wind");
+    const fHumidity = $(".f-humid");
     
     // console.log(cityInput);
     var cityList = [];
@@ -115,14 +117,17 @@ searchBtn.on("click", function(query) {
                     };
 
                     let forecastDaily = [];
-                    forecastDaily.push(data.daily);
-
+                    forecastDaily.push(data.daily[0], data.daily[1], data.daily[2], data.daily[3], data.daily[4]);
+                    console.log(forecastDaily);
 
 
                 // Populate 5-Day Forecast
                     for(var i=0; i < 5; i++) {
                         console.log(forecast[i].temp.day);
 
+                        fTemp[i].textContent = "Temp: " + forecastDaily[i].temp.day + "°F";
+                        fWind[i].textContent = "Wind: " + forecastDaily[i].wind_speed + "mph";
+                        fHumidity[i].textContent = "Humidity: " + forecastDaily[i].humidity + "%";
                         // let dailyW = data.daily[i].weather[0].main
                         // let fwIcon = [];
                         // fwIcon.push();
@@ -147,7 +152,7 @@ searchBtn.on("click", function(query) {
                         // })
                         
                         
-                        // fIcon.textContent = shuffledQuestions[currentQuestionIndex].choices[i];
+                        
                     // Define Data for forecast
                         // var fTemp = document.createElement("p");
                         // var fWind = document.createElement("p");
