@@ -118,10 +118,28 @@ searchBtn.on("click", function(query) {
 
                     let forecastDaily = [];
                     let fWeather = [];
+                    // let fwIconArr = [];
 
                     for(var i=0; i<5; i++) {
+
                         forecastDaily.push(data.daily[i])
                         fWeather.push(forecastDaily[i].weather[0].main);
+                        let fwIcon = fWeather[i];
+                            if(fwIcon === "Clear"){
+                                fWeather[i] = "fa-sun";
+                            } else if(fwIcon === "Drizzle") {
+                                fWeather[i] = "fa-cloud-drizzle";
+                            } else if(fwIcon === "Rain") {
+                                fWeather[i] = "fa-cloud-showers-heavy";
+                            } else if(fwIcon === "Thunderstorm") {
+                                fWeather[i] = "fa-cloud-bolt";
+                            } else if(fwIcon === "Clouds") {
+                                fWeather[i] = "fa-cloud";
+                            } else if(fwIcon === "Snow") {
+                                fWeather[i] = "fa-cloud-snow";
+                            } else if(fwIcon === "Atmosphere") {
+                                fWeather[i] = "fa-smoke";
+                            };
                     }
                     console.log(forecastDaily);
                     console.log(fWeather);
@@ -133,9 +151,14 @@ searchBtn.on("click", function(query) {
                         fTemp[i].textContent = "Temp: " + forecastDaily[i].temp.day + "°F";
                         fWind[i].textContent = "Wind: " + forecastDaily[i].wind_speed + "mph";
                         fHumidity[i].textContent = "Humidity: " + forecastDaily[i].humidity + "%";
+                        $("#f-icon0").addClass(fWeather[0]);
+                        $("#f-icon1").addClass(fWeather[1]);
+                        $("#f-icon2").addClass(fWeather[2]);
+                        $("#f-icon3").addClass(fWeather[3]);
+                        $("#f-icon4").addClass(fWeather[4]);
 
                     // Set icons to forecast cards
-                        // let fwIconArr = [];
+
                         // for(var i=0; i< forecastDaily.length; i++) {
                             
                         // }
@@ -149,26 +172,9 @@ searchBtn.on("click", function(query) {
                             // let fwIcon = forecastDaily[i].weather[0].main;
                             // console.log(fwIcon);
 
-                            // if(fwIcon === "Clear"){
-                            //     fwIconArr.push("fa-sun");
-                            //     // let fClass = "fa-sun"
-                            //     // fIcon[i].classList.add("fa-sun");
-                            // } else if(fwIcon === "Drizzle") {
-                            //     fwIconArr.push("fa-cloud-drizzle");
-                            // } else if(fwIcon === "Rain") {
-                            //     fwIconArr.push("fa-cloud-showers-heavy");
-                            // } else if(fwIcon === "Thunderstorm") {
-                            //     fwIconArr.push("fa-cloud-bolt");
-                            // } else if(fwIcon === "Clouds") {
-                            //     console.log("cloudy skies")
-                            //     fwIconArr.push("fa-cloud");
-                            // } else if(fwIcon === "Snow") {
-                            //     fwIconArr.push("fa-cloud-snow");
-                            // } else if(fwIcon === "Atmosphere") {
-                            //     fwIconArr.push("fa-smoke");
-                            // };
 
-                            // fIcon[i].addClass(fwIconArr[i]);
+
+                            // 
                         // })
 
                     }
@@ -180,10 +186,10 @@ searchBtn.on("click", function(query) {
         let = cityInput.val("");
 });
 
-// alternate icon display KEEP --------------------------------
+// alternate icon display ---KEEP---------------------------------
 // var iconURL = "http://openweathermap.org/img/wn/" + wIcon + ".png"; 
 // $("#c-icon").html("<img src=" + iconURL + ">");
-// ------------------------------------------------------------
+// ---------------------------------------------------------------
 
 // RENDER LOCAL STORAGE
 // function renderLocalStorage() {
