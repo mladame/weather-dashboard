@@ -25,10 +25,9 @@
 // FETCH API 
 searchBtn.on("click", function(query) {
 
-    renderLocalStorage()
+    // renderLocalStorage()
     // Define user input for desired city
         let cityInput = $("#city-input").val().trim();
-        // cityList.push(cityInput);
         // setCityList()
 
     // api url to get lat + lon for desired city
@@ -161,23 +160,25 @@ searchBtn.on("click", function(query) {
 // ---------------------------------------------------------------
 
 // SET LOCAL STORAGE
-// function setCityList(){
-    
-    
-    
-    
-// }
+function setCityList(){
+
+    let userInput = $(".user-input").val().trim();
+
+    if (!cityList.includes(userInput)) {
+        cityList.push(userInput);
+        localStorage.setItem("cityList", JSON.stringify(cityList));
+    };   
+}
 
 // RENDER LOCAL STORAGE
 function renderLocalStorage() {
-    let userInput = $(".user-input").val().trim();
-    if (!cityList.includes(userInput)) {
-        cityList.push(userInput);
-        var storedCity = $(`<li class="list-group-item">[${cityList}]</li>`);
-        $("#city-name").append(storedCity);
-        localStorage.setItem("cityList", JSON.stringify(cityList));
-    };
     
+    let searchedCities = JSON.parse(localStorage.getItem("cityList"));
+
+    for(var i=0; i<cityList.length; i++) {
+        var storedCity = $(`<li class="list-group-item">[${searchedCities[i]}]</li>`);
+        $("#city-name").append(storedCity);
+    }
     // get + render local storage
         // let searchHistory = document.createElement("li");
         // searchHistory.textContent= JSON.parse(localStorage.getItem("cityList"));
