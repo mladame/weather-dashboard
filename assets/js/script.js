@@ -17,6 +17,8 @@
 // const forecastCards = $(".forecast");
     const displayHistory = $("#city-name");
     const fIcon = $(".f-icon");
+    const fData = $(".f-data");
+    const fDate = $(".f-date");
 
     
     // console.log(cityInput);
@@ -76,17 +78,13 @@ searchBtn.on("click", function(query) {
                 
                 // Sets Forecast dates
                     let startDate = moment();
-                    let forecastArr = [];
+                    let forecastDatesArr = [];
                     
                 // Populates Dates of Forecast cards
                     for(let i=0; i<5; i++){
                     forecastDates = startDate.add( + 1, 'days').format("MM/DD/YYYY");
-                    forecastArr.push(forecastDates);
-                    $("#day1").text(forecastArr[0]);
-                    $("#day2").text(forecastArr[1]);
-                    $("#day3").text(forecastArr[2]);
-                    $("#day4").text(forecastArr[3]);
-                    $("#day5").text(forecastArr[4]);
+                    forecastDatesArr.push(forecastDates);
+                    fDate[i].textContent = forecastDatesArr[i];
                     }                
 
                 // Set UV Index indicator
@@ -115,30 +113,41 @@ searchBtn.on("click", function(query) {
                     } else if(wIcon === "Atmosphere") {
                         cIcon.addClass("fa-smoke");
                     };
-                let fwIcon = data.daily[i].weather[0].main;
+
+                    let forecastDaily = [];
+                    forecastDaily.push(data.daily);
+
+
+
                 // Populate 5-Day Forecast
                     for(var i=0; i < 5; i++) {
                         console.log(forecast[i].temp.day);
+
+                        // let dailyW = data.daily[i].weather[0].main
+                        // let fwIcon = [];
+                        // fwIcon.push();
+                        // console.log(dailyW);
+                        // fwIcon.forEach(fIcon => {
+                        //     if(fwIcon === "Clear"){
+                        //     fIcon.addClass("fa-sun");
+                        //     } else if(fwIcon === "Drizzle") {
+                        //         fIcon.addClass("fa-cloud-drizzle");
+                        //     } else if(fwIcon === "Rain") {
+                        //         fIcon.addClass("fa-cloud-showers-heavy");
+                        //     } else if(fwIcon === "Thunderstorm") {
+                        //         fIcon.addClass("fa-cloud-bolt");
+                        //     } else if(fwIcon === "Clouds") {
+                        //         console.log("cloudy skies")
+                        //         fIcon.addClass("fa-cloud");
+                        //     } else if(fwIcon === "Snow") {
+                        //         fIcon.addClass("fa-cloud-snow");
+                        //     } else if(fwIcon === "Atmosphere") {
+                        //         fIcon.addClass("fa-smoke");
+                        //     };
+                        // })
                         
-
-                        if(fwIcon === "Clear"){
-                            fIcon.addClass("fa-sun");
-                        } else if(fwIcon === "Drizzle") {
-                            fIcon.addClass("fa-cloud-drizzle");
-                        } else if(fwIcon === "Rain") {
-                            fIcon.addClass("fa-cloud-showers-heavy");
-                        } else if(fwIcon === "Thunderstorm") {
-                            fIcon.addClass("fa-cloud-bolt");
-                        } else if(fwIcon === "Clouds") {
-                            console.log("cloudy skies")
-                            fIcon.addClass("fa-cloud");
-                        } else if(fwIcon === "Snow") {
-                            fIcon.addClass("fa-cloud-snow");
-                        } else if(fwIcon === "Atmosphere") {
-                            fIcon.addClass("fa-smoke");
-                        };
-
-                        // answerPool.children[i].textContent = shuffledQuestions[currentQuestionIndex].choices[i];
+                        
+                        // fIcon.textContent = shuffledQuestions[currentQuestionIndex].choices[i];
                     // Define Data for forecast
                         // var fTemp = document.createElement("p");
                         // var fWind = document.createElement("p");
