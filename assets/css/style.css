@@ -29,6 +29,13 @@ header{
     margin: 20px;
 }
 
+/* .master{
+    display: flex;
+    flex-direction: row;
+}
+
+.user-container */
+
 /* --------USER INPUT-------- */
 .aside {
     margin-right: 30px;
@@ -75,7 +82,7 @@ header{
 
 #city-name li {
     background-color: #000;
-    
+
 }
 
 #clear-btn {
@@ -141,4 +148,15 @@ header{
 
 .card-body {
     background-color: var(--black);
+}
+
+@media screen and (max-width:576px) {
+    .master{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .user-container{
+        margin: 20px;
+    }
 }
