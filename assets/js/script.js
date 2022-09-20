@@ -1,169 +1,209 @@
-// Pseudocode
-// need:
-//  
-//      city name, date(moment.js format (mm/dd/yyyy)), day/night; icon representing weather;
-//   list local storage - search history
-//      previously searched cities remain on list despite refresh, display upon page open
-//      weather info clears upon refresh
-//      can click on cities and get info, will overwrite what is being shown
-
-// Start Code
 // DEFINE ELEMENTS
-const searchBtn = $("#search-btn");
-const cityDate = $("#city-date");
-const cIcon = $("#c-icon");
-const cTemp = $("#c-temp");
-const cWind = $("#c-wind");
-const cHumidity = $("#c-humidity");
-const cUVI = $("#c-uvi");
-const forecastCards = $(".forecast");
-const pentIcon = $(".f-icon");
-const pentTemp = $(".f-temp");
-const pentWind = $(".f-wind");
-const pentHumid = $(".f-humid");
+    const searchBtn = $("#search-btn");
+    const displayHistory = $("#city-name");
+    let cityInput = $("#city-input").val().trim();
 
-const currentDate = moment().format("MM/DD/YYYY");
-const fDate = $(".f-date");
+    const cityDate = $("#city-date");
+    const cIcon = $("#c-icon");
+    const cTemp = $("#c-temp");
+    const cWind = $("#c-wind");
+    const cHumidity = $("#c-humidity");
+    const cUVI = $("#c-uvi");
+// const forecastCards = $(".forecast");
+    
+    const fIcon = $(".f-icon");
+    const fDate = $(".f-date");
+    const fTemp = $(".f-temp");
+    const fWind = $(".f-wind");
+    const fHumidity = $(".f-humid");
+    
+    // console.log(cityInput);
+    var cityList = [];
 
-let cityList = [];
+    const currentDate = moment().format("MM/DD/YYYY");    
 
-// FETCH API
-searchBtn.on("click", function(query){
+// FETCH API 
+searchBtn.on("click", function(query) {
 
+    // renderLocalStorage()
     // Define user input for desired city
-    let cityInput = $("#city-input");
-    // iterate over cityInput's keys, logs key names and respective values to console
-    for(let key in cityInput) {
-        // console.log(key + ":", cityInput[key].value);
-    }
+        let cityInput = $("#city-input").val().trim();
+        // setCityList()
 
     // api url to get lat + lon for desired city
-    let geocoderURL = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityInput[0].value + '&appid=d2cb5b734a2fa9d859a2d482475acef1'
+        let geocoderURL = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityInput + '&appid=d2cb5b734a2fa9d859a2d482475acef1';
 
     // fetch api for geocoder, user inputs desired City, geocoder returns corresponding lat + lon
-    fetch(geocoderURL)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data[0]);
+        fetch(geocoderURL)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data[0]);
+
             // Define lat and lon
-            let geoLat = data[0].lat;
-            let geoLon = data[0].lon;
+                let geoLat = data[0].lat;
+                let geoLon = data[0].lon;
+
             // Define + display city + current date
-            const cityName = data[0].name;
-            cityDate.text(cityName + "  " + currentDate);
-            var name = $("#city-name").attr("id");
-            localStorage.setItem(name, JSON.stringify(cityName));
-            
-            $("#city-name cityName").val(localStorage.getItem("city-name"));
-            
-            for(let i=0; i<5; i++){
-            let startDate = moment();                
-            let incDays = startDate.add(i + 1, 'days').format("MM/DD/YYYY");
-            fDate.text(incDays);                
-            }
+                const cityName = data[0].name;
+                cityDate.text(cityName + "  " + currentDate);
 
             // fetch weather api using values pulled from geocoder api call
-            let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + geoLat + '&lon=' + geoLon + '&exclude=minutely,hourly,alerts&units=imperial&appid=9b35244b1b7b8578e6c231fd7654c186'
+                let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + geoLat + '&lon=' + geoLon + '&exclude=minutely,hourly,alerts&units=imperial&appid=9b35244b1b7b8578e6c231fd7654c186'
 
             // fetch weather api, input lat + lon for desired City, return weather report
-            fetch(weatherURL)
+                fetch(weatherURL)
                 .then(response => response.json())
-            .then(data => {
+                .then(data => {
 
-                let weatherIcon = JSON.stringify(data.current.weather[0].main);
-                let forecast = data.daily;
-                cTemp.text("Temp: " + data.current.temp + " °F");
-                cWind.text("Wind Speed: " + data.current.wind_speed + " mph");
-                cHumidity.text("Humidity: " + data.current.humidity + "%");
-                cUVI.text("UV Index: " + data.current.uvi);
-
-                console.log(weatherIcon);
-                console.log(forecast);
-
+                // Define data
+                    console.log(data);
+                    let wIcon = data.current.weather[0].main;               
+                    let forecastData = []
+                    let forecast = data.daily;
+                    forecastData.push(forecast);
+                    console.log(wIcon);
                 
+                // set current weather conditions
+                    cTemp.text("Temp: " + data.current.temp + " °F");
+                    cWind.text("Wind Speed: " + data.current.wind_speed + " mph");
+                    cHumidity.text("Humidity: " + data.current.humidity + "%");
+                    cUVI.text("UV Index: " + data.current.uvi);
                 
-                if(weatherIcon === "Clear"){
-                    console.log("hi");
-                    cIcon.addClass("fa-sun");
-                } else if(weatherIcon === "Drizzle") {
-                    cIcon.addClass("fa-cloud-drizzle");
-                } else if(weatherIcon === "Rain") {
-                    cIcon.addClass("fa-cloud-showers-heavy");
-                } else if(weatherIcon === "Thunderstorm") {
-                    cIcon.addClass("fa-cloud-bolt");
-                } else if(weatherIcon === "Clouds") {
-                    cIcon.addClass("fa-cloud");
-                } else if(weatherIcon === "Snow") {
-                    cIcon.addClass("fa-cloud-snow");
-                } else if(weatherIcon === "Atmosphere") {
-                    cIcon.addClass("fa-smoke");
-                };
+                // Sets Forecast dates
+                    let startDate = moment();
+                    let forecastDatesArr = [];
+                    
+                // Populates Dates of Forecast cards
+                    for(let i=0; i<5; i++){
+                    forecastDates = startDate.add( + 1, 'days').format("MM/DD/YYYY");
+                    forecastDatesArr.push(forecastDates);
+                    fDate[i].textContent = forecastDatesArr[i];
+                    }                
 
-                if (data.current.uvi < "3") {
-                    cUVI.addClass("favorable");
-                } else if (data.current.uvi > "5") {
-                    cUVI.addClass("severe");
-                } else {
-                    cUVI.addClass("moderate");
-                }
+                // Set UV Index indicator
+                    if (data.current.uvi < "3" || data.current.uvi === "0") {
+                        cUVI.addClass("favorable");
+                    } else if (data.current.uvi > "5") {
+                        cUVI.addClass("severe");
+                    } else {
+                        cUVI.addClass("moderate");
+                    }
+
+                // Adds class to icon html to render corresponding forecast - main display
+                    if(wIcon === "Clear"){
+                        cIcon.addClass("fa-sun");
+                    } else if(wIcon === "Drizzle") {
+                        cIcon.addClass("fa-cloud-drizzle");
+                    } else if(wIcon === "Rain") {
+                        cIcon.addClass("fa-cloud-showers-heavy");
+                    } else if(wIcon === "Thunderstorm") {
+                        cIcon.addClass("fa-cloud-bolt");
+                    } else if(wIcon === "Clouds") {
+                        console.log("cloudy skies")
+                        cIcon.addClass("fa-cloud");
+                    } else if(wIcon === "Snow") {
+                        cIcon.addClass("fa-cloud-snow");
+                    } else if(wIcon === "Atmosphere") {
+                        cIcon.addClass("fa-smoke");
+                    };
+
+                // Arrays hold data to populate forecast cards
+                    let forecastDaily = [];
+                    let fWeather = [];
+
+                    for(var i=0; i<5; i++) {
+                        forecastDaily.push(data.daily[i])
+                        fWeather.push(forecastDaily[i].weather[0].main);
+                        let fwIcon = fWeather[i];
+                            if(fwIcon === "Clear"){
+                                fWeather[i] = "fa-sun";
+                            } else if(fwIcon === "Drizzle") {
+                                fWeather[i] = "fa-cloud-drizzle";
+                            } else if(fwIcon === "Rain") {
+                                fWeather[i] = "fa-cloud-showers-heavy";
+                            } else if(fwIcon === "Thunderstorm") {
+                                fWeather[i] = "fa-cloud-bolt";
+                            } else if(fwIcon === "Clouds") {
+                                fWeather[i] = "fa-cloud";
+                            } else if(fwIcon === "Snow") {
+                                fWeather[i] = "fa-cloud-snow";
+                            } else if(fwIcon === "Atmosphere") {
+                                fWeather[i] = "fa-smoke";
+                            };
+                    };
 
                 // Populate 5-Day Forecast
-                for(var i=0; i < 5; i++) {
+                    for(var i=0; i < 5; i++) {
 
-                    // Define Data for forecast
-                    let fTemps = forecast[i].temp.day;
-                    let fWind = forecast[i].wind_speed;
-                    let fHumidity = forecast[i].humidity;
-                    let fIcon = forecast[i].weather[0].main;
-                    // let startDate = moment();
-                    // let incDays = startDate.add(i + 1, 'days').format("MM/DD/YYYY");
-                    // var obj = {date: incDays}
-                    // let pentDates = [];
-                    // console.log(incDays);
-                    // pentDates.push(obj);
-                    // console.log(pentDates);
-                    
-                    // fDate.text(incDays);
-                    pentTemp.text("Temp: " + fTemps);
-                    pentWind.text("Wind: " + fWind + " mph");
-                    pentHumid.text("Humidity: " + fHumidity + "%");
+                    // Set daily data to forecast cards
+                        fTemp[i].textContent = "Temp: " + forecastDaily[i].temp.day + "°F";
+                        fWind[i].textContent = "Wind: " + forecastDaily[i].wind_speed + "mph";
+                        fHumidity[i].textContent = "Humidity: " + forecastDaily[i].humidity + "%";
+                        $("#f-icon0").addClass(fWeather[0]);
+                        $("#f-icon1").addClass(fWeather[1]);
+                        $("#f-icon2").addClass(fWeather[2]);
+                        $("#f-icon3").addClass(fWeather[3]);
+                        $("#f-icon4").addClass(fWeather[4]);
 
-                    if(fIcon === "clear"){
-                        pentIcon.addClass("fa-sun");
-                    } else if(fIcon === "drizzle") {
-                        pentIcon.addClass("fa-cloud-drizzle");
-                    } else if(fIcon === "rain") {
-                        pentIcon.addClass("fa-cloud-showers-heavy");
-                    } else if(fIcon === "thunderstorm") {
-                        pentIcon.addClass("fa-cloud-bolt");
-                    } else if(fIcon === "Clouds") {
-                        pentIcon.addClass("fa-cloud");
-                    } else if(fIcon === "snow") {
-                        pentIcon.addClass("fa-cloud-snow");
-                    } else if(fIcon === "atmosphere") {
-                        pentIcon.addClass("fa-smoke");
-                    };
-                
-                }
+                    }
 
-            });
+                });
 
-        })
-        
+            })
 
-    // Define value and key, set to local storage
-    // var city = $(this).siblings("#city-input").val();
-    // var name = $(this).parent().attr("id");
-    // localStorage.setItem(name, JSON.stringify(city));
+    let = cityInput.val("");
+});
 
-    // cityList.push(JSON.parse(localStorage.getItem("city-name")));
-    // console.log(cityList);
+// alternate icon display ---KEEP---------------------------------
+// var iconURL = "http://openweathermap.org/img/wn/" + wIcon + ".png"; 
+// $("#c-icon").html("<img src=" + iconURL + ">");
+// ---------------------------------------------------------------
 
-    // // create new element from local storage
-    // const searches = document.createElement("p");
-    // searches.textContent = localstorage.getItem("city-name");
-    // document.body.appendChild(searches);
+// SET LOCAL STORAGE
+function setCityList(){
 
-        cityInput.val("");
-})
+    let userInput = $(".user-input").val().trim();
 
+    if (!cityList.includes(userInput)) {
+        cityList.push(userInput);
+        localStorage.setItem("cityList", JSON.stringify(cityList));
+    };   
+}
+
+// RENDER LOCAL STORAGE
+function renderLocalStorage() {
+    
+    let searchedCities = JSON.parse(localStorage.getItem("cityList"));
+
+    for(var i=0; i<cityList.length; i++) {
+        var storedCity = $(`<li class="list-group-item">[${searchedCities[i]}]</li>`);
+        $("#city-name").append(storedCity);
+    }
+    // get + render local storage
+        // let searchHistory = document.createElement("li");
+        // searchHistory.textContent= JSON.parse(localStorage.getItem("cityList"));
+        // // searchHistory.appendChild(searchHistoryText);
+        // console.log(searchHistory);
+        // const links = $("#city-name");
+        // links.appendChild(searchHistory);
+    // links.
+
+    // links.value = 
+    
+    // searchHistory.forEach(displayHistory => {
+
+    // });
+    // for(let i=0; i < searchHistory.length; i++) {
+    //     const searches = document.createElement("li");
+    //     searches.textContent = searchHistory[0];
+    //     displayHistory.appendChild(searches).addClass("sh my-2");
+    // }
+
+}
+// renderLocalStorage()
+
+// CLEAR LOCAL STORAGE
+const clearBtn = $("#clear-btn");
+clearBtn.on("click", function(event){
+    localStorage.clear()
+}); 

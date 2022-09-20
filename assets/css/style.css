@@ -29,6 +29,13 @@ header{
     margin: 20px;
 }
 
+/* .master{
+    display: flex;
+    flex-direction: row;
+}
+
+.user-container */
+
 /* --------USER INPUT-------- */
 .aside {
     margin-right: 30px;
@@ -60,6 +67,8 @@ header{
 
 #search-btn {
     width: fit-content;
+    background-color: var(--gray);
+    border: none;
 }
 
 /* -------LOCAL STORAGE------ */
@@ -68,6 +77,22 @@ header{
     border-radius: 10px;
     padding: 10px;
     min-height: 200px;
+    display: flex;
+}
+
+#city-name li {
+    background-color: #000;
+
+}
+
+#clear-btn {
+    background-color: #000;
+    /* display: flex; */
+    /* justify-content: flex-end;
+    align-items: flex-end;
+    vertical-align: bottom; */
+    position: absolute;
+    bottom: 20px;
 }
 
 /* -------WEATHER DISPLAY-------- */
@@ -83,6 +108,11 @@ header{
     margin-left: 100px;
     font-size: 20px;
     border-radius: 10px;
+}
+
+#c-icon {
+    margin-left: 100px;
+    max-width: 70%;
 }
 
 #c-uvi {
@@ -118,4 +148,15 @@ header{
 
 .card-body {
     background-color: var(--black);
+}
+
+@media screen and (max-width:576px) {
+    .master{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .user-container{
+        margin: 20px;
+    }
 }
