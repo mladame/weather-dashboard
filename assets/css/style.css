@@ -73,6 +73,11 @@ header{
     display: flex;
 }
 
+#city-name li {
+    background-color: #000;
+    
+}
+
 #clear-btn {
     background-color: #000;
     /* display: flex; */

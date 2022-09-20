@@ -1,13 +1,8 @@
-// Pseudocode
-// need:
-//   list local storage - search history
-//      previously searched cities remain on list despite refresh, display upon page open
-//      weather info clears upon refresh
-//      can click on cities and get info, will overwrite what is being shown
-
-// Start Code
 // DEFINE ELEMENTS
     const searchBtn = $("#search-btn");
+    const displayHistory = $("#city-name");
+    let cityInput = $("#city-input").val().trim();
+
     const cityDate = $("#city-date");
     const cIcon = $("#c-icon");
     const cTemp = $("#c-temp");
@@ -15,9 +10,8 @@
     const cHumidity = $("#c-humidity");
     const cUVI = $("#c-uvi");
 // const forecastCards = $(".forecast");
-    const displayHistory = $("#city-name");
+    
     const fIcon = $(".f-icon");
-    const fData = $(".f-data");
     const fDate = $(".f-date");
     const fTemp = $(".f-temp");
     const fWind = $(".f-wind");
@@ -25,14 +19,17 @@
     
     // console.log(cityInput);
     var cityList = [];
+
     const currentDate = moment().format("MM/DD/YYYY");    
 
-// FETCH API
-// searchBtn.on("click", getWeather) 
+// FETCH API 
 searchBtn.on("click", function(query) {
 
+    renderLocalStorage()
     // Define user input for desired city
         let cityInput = $("#city-input").val().trim();
+        // cityList.push(cityInput);
+        // setCityList()
 
     // api url to get lat + lon for desired city
         let geocoderURL = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityInput + '&appid=d2cb5b734a2fa9d859a2d482475acef1';
@@ -50,11 +47,6 @@ searchBtn.on("click", function(query) {
             // Define + display city + current date
                 const cityName = data[0].name;
                 cityDate.text(cityName + "  " + currentDate);
-
-            // Set Local Storage
-                cityList.push(cityInput);
-                localStorage.setItem("cityList", JSON.stringify(cityList));
-                console.log(localStorage);
 
             // fetch weather api using values pulled from geocoder api call
                 let weatherURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + geoLat + '&lon=' + geoLon + '&exclude=minutely,hourly,alerts&units=imperial&appid=9b35244b1b7b8578e6c231fd7654c186'
@@ -116,12 +108,11 @@ searchBtn.on("click", function(query) {
                         cIcon.addClass("fa-smoke");
                     };
 
+                // Arrays hold data to populate forecast cards
                     let forecastDaily = [];
                     let fWeather = [];
-                    // let fwIconArr = [];
 
                     for(var i=0; i<5; i++) {
-
                         forecastDaily.push(data.daily[i])
                         fWeather.push(forecastDaily[i].weather[0].main);
                         let fwIcon = fWeather[i];
@@ -140,9 +131,7 @@ searchBtn.on("click", function(query) {
                             } else if(fwIcon === "Atmosphere") {
                                 fWeather[i] = "fa-smoke";
                             };
-                    }
-                    console.log(forecastDaily);
-                    console.log(fWeather);
+                    };
 
                 // Populate 5-Day Forecast
                     for(var i=0; i < 5; i++) {
@@ -157,33 +146,13 @@ searchBtn.on("click", function(query) {
                         $("#f-icon3").addClass(fWeather[3]);
                         $("#f-icon4").addClass(fWeather[4]);
 
-                    // Set icons to forecast cards
-
-                        // for(var i=0; i< forecastDaily.length; i++) {
-                            
-                        // }
-                        
-                        // let dailyW = data.daily[i].weather[0].main
-                        
-                        // fwIcon.push();
-                        // console.log(dailyW);
-                        // forecastDaily.forEach(fIcon => {
-
-                            // let fwIcon = forecastDaily[i].weather[0].main;
-                            // console.log(fwIcon);
-
-
-
-                            // 
-                        // })
-
                     }
 
                 });
 
             })
 
-        let = cityInput.val("");
+    let = cityInput.val("");
 });
 
 // alternate icon display ---KEEP---------------------------------
@@ -191,39 +160,49 @@ searchBtn.on("click", function(query) {
 // $("#c-icon").html("<img src=" + iconURL + ">");
 // ---------------------------------------------------------------
 
-// RENDER LOCAL STORAGE
-// function renderLocalStorage() {
-
-//     // // set local storage
-//     // cityList.push(cityInput);
-//     // localStorage.setItem("cityList", JSON.stringify(cityList));
-//     // console.log(localStorage);
-
-//     // get + render local storage
-//     let searchHistory = document.createElement("li");
-//     searchHistory.textContent= JSON.parse(localStorage.getItem("cityList"));
-//     // searchHistory.appendChild(searchHistoryText);
-//     console.log(searchHistory);
-//     const links = $("#city-name");
-//     links.appendChild(searchHistory);
-//     // links.
-
-//     // links.value = 
+// SET LOCAL STORAGE
+// function setCityList(){
     
-//     // searchHistory.forEach(displayHistory => {
-
-//     // });
-//     // for(let i=0; i < searchHistory.length; i++) {
-//     //     const searches = document.createElement("li");
-//     //     searches.textContent = searchHistory[0];
-//     //     displayHistory.appendChild(searches).addClass("sh my-2");
-//     // }
-
+    
+    
+    
 // }
+
+// RENDER LOCAL STORAGE
+function renderLocalStorage() {
+    let userInput = $(".user-input").val().trim();
+    if (!cityList.includes(userInput)) {
+        cityList.push(userInput);
+        var storedCity = $(`<li class="list-group-item">[${cityList}]</li>`);
+        $("#city-name").append(storedCity);
+        localStorage.setItem("cityList", JSON.stringify(cityList));
+    };
+    
+    // get + render local storage
+        // let searchHistory = document.createElement("li");
+        // searchHistory.textContent= JSON.parse(localStorage.getItem("cityList"));
+        // // searchHistory.appendChild(searchHistoryText);
+        // console.log(searchHistory);
+        // const links = $("#city-name");
+        // links.appendChild(searchHistory);
+    // links.
+
+    // links.value = 
+    
+    // searchHistory.forEach(displayHistory => {
+
+    // });
+    // for(let i=0; i < searchHistory.length; i++) {
+    //     const searches = document.createElement("li");
+    //     searches.textContent = searchHistory[0];
+    //     displayHistory.appendChild(searches).addClass("sh my-2");
+    // }
+
+}
 // renderLocalStorage()
 
 // CLEAR LOCAL STORAGE
-// const clearBtn = $("#clear-btn");
-// clearBtn.on("click", function(event){
-//     localStorage.clear()
-// }); 
+const clearBtn = $("#clear-btn");
+clearBtn.on("click", function(event){
+    localStorage.clear()
+}); 
